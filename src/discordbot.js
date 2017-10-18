@@ -7,6 +7,7 @@ const Discord = require('discord.js');
 class DiscordBot {
   constructor(token, plugins) {
     this.client = new Discord.Client();
+    this.discord_token = token;
     this.plugins = plugins;
   }
 
@@ -17,7 +18,7 @@ class DiscordBot {
   }
 
   login() {
-    this.client.login(process.env.DISCORD_TOKEN);
+    this.client.login(this.discord_token);
   }
 
   ready() {
