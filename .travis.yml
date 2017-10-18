@@ -6,6 +6,3 @@ node_js:
 
 install:
   - npm install
-
-script:
-  - node examples/run_discordbot.js
