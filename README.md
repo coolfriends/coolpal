@@ -25,7 +25,7 @@ npm install
 ## Usage
 ### Run the example
 ```bash
-node example/run_discordbot.js
+node examples/run_discordbot.js
 ```
 
 ## TODO
