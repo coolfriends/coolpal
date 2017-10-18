@@ -27,6 +27,10 @@ npm install
 ```bash
 node examples/run_discordbot.js
 ```
+### If you encounter an error about invalid token, check your environment variable:
+```javascript
+this.client.login(process.env.DISCORD_TOKEN);
+```
 
 ## TODO
 * Create tests
