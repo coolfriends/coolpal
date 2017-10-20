@@ -29,11 +29,11 @@ TODO: Finish README and implementation of poll.js
 Start by implementing the `create` and `create_help` functions, and changing up `handle_message`
 ```js
 handle_message(message) {
-  if (message.content.startsWith('poll create')) {
-    this.create(message);
-    return(true);
-  } else if (message.content.startsWith('poll create help')) {
+  if (message.content.startsWith('poll create help')) {
     this.create_help(message);
+    return(true);
+  } else if (message.content.startsWith('poll create')) {
+    this.create(message);
     return(true);
   }
   return(false);
@@ -63,23 +63,7 @@ create_help(message) {
 }
 ```
 
-Next, implement the list methods. The `poll list` command can also be called with 
-a poll id, which lets you list the options for a poll.
-```
-handle_message(message) {
-  ...
-  } else if (message.content.startsWith('poll list')) {
-    this.list(message);
-    return(true);
-  } else if (message.content.startsWith('poll list help')) {
-    this.list_help(message);
-    return(true);
-  }
-  return(false);
-}
-```
+With this, the bot knows how to respond to the `poll create` and `poll create help` methods.
 
-
-
-
+The rest of the poll plugin can be viewed 
 
