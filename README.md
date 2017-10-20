@@ -47,4 +47,7 @@ node examples/run_print_poll_list.js
 * Spruce up weather report with em0jis
 * Abstract displaying in a tabular format for easier use (make display_polls generic somehow)
   from `examples/run_print_poll_list.js`
+* Change plugin interface where DiscordBot splits the incoming message into a command and args,
+  and passes to plugins accordingly (by command name)
+  
 
