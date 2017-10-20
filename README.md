@@ -49,5 +49,6 @@ node examples/run_print_poll_list.js
   from `examples/run_print_poll_list.js`
 * Change plugin interface where DiscordBot splits the incoming message into a command and args,
   and passes to plugins accordingly (by command name)
+* Add prefix support
   
 
