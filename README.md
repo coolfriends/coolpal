@@ -23,10 +23,17 @@ npm install
 ```
 
 ## Usage
-### Run the example
+Run the example
 ```bash
 node examples/run_discordbot.js
 ```
+
+Demonstrate displaying polls in a tabular format
+```bash
+node examples/run_print_poll_list.js
+```
+
+
 
 ## TODO
 * Create tests
@@ -38,4 +45,6 @@ node examples/run_discordbot.js
 * Reminder plugin
 * Add waiter to DB creation script
 * Spruce up weather report with em0jis
+* Abstract displaying in a tabular format for easier use (make display_polls generic somehow)
+  from `examples/run_print_poll_list.js`
 
