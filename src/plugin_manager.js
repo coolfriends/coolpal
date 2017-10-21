@@ -31,9 +31,11 @@ class PluginManager {
     this.event_types = this.unique_event_types();
   }
 
-  handle_event(event_type, event, client) {
+  handle_event(event_type, event, config) {
     for (let plugin of this.plugins) {
-      plugin.handle_event(event_type, event, client);
+      if (plugin.handle_event(event_type, event, config)) {
+        break;
+      }
     }
   }
 }

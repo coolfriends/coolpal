@@ -1,5 +1,3 @@
-const Plugin = require('../plugin.js');
-
 class HelloWorldPlugin {
   constructor() {
     this.supported_event_types = ['message'];
@@ -17,9 +15,10 @@ class HelloWorldPlugin {
     if (message.author != config.client.user.username) {
       if (message.content.startsWith(config.prefix + 'helloworld')) {
         message.reply("Hello, world!");
+        return true;
       }
     }
-    return true;
+    return false;
   }
 }
 
