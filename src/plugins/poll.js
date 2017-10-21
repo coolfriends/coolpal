@@ -1,5 +1,3 @@
-const Plugin = require('../plugin.js');
-
 // TODO: Finish implementing Poll plugin
 class PollPlugin {
   /*

@@ -1,5 +1,4 @@
 const AWS = require('aws-sdk');
-const Plugin = require('../plugin.js');
 
 const default_config = {
   aws_region: 'us-west-2'
