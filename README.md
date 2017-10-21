@@ -33,6 +33,93 @@ Demonstrate displaying polls in a tabular format
 node examples/run_print_poll_list.js
 ```
 
+## Development
+
+### Create a new plugin
+In src/plugins, create hello_world.js
+```js
+class HelloWorldPlugin {
+}
+
+module.exports = HelloWorldPlugin;
+```
+
+Add a constructor that specifies the types of Discord events this plugin will handle.
+```js
+```js
+class HelloWorldPlugin {
+  constructor() {
+    this.supported_event_types = ['message'];
+  }
+}
+...
+```
+
+Then create a handle_event function. This function will return true if the
+plugin is supposed to handle the event. It serves as an entry point to functions
+that do work.
+```js
+class HelloWorldPlugin {
+  ...
+  handle_event(event_type, event, config) {
+    if (event_type == 'message') {
+      return this.handle_message(event, config);
+    }
+    return false;
+  }
+}
+...
+```
+
+Finally, implement the handle_message function that takes the event and a
+configuration file (passed in from `DiscordBot.receive_event`).
+```js
+class HelloWorldPlugin {
+  ...
+  handle_message(message, config) {
+    // Make sure author of the message is not the bot
+    if (message.author != config.client.user.username) {
+      if (message.content.startsWith(config.prefix + 'helloworld')) {
+        message.reply("Hello, world!");
+        return true;
+      }
+    }
+    // Make sure to return false if this plugin is not designed to handle the
+    // message passed in.
+    return false;
+  }
+}
+...
+```
+
+### Use the `HelloWorldPlugin`
+```js
+const HelloWorldPlugin = require('../src/plugins/hello_world.js');
+const DiscordBot = require('../src/discordbot.js');
+
+let plugins = [
+  new HelloWorldPlugin
+];
+
+let token = process.env.DISCORD_TOKEN;
+let bot = new DiscordBot(token, plugins);
+bot.start();
+```
+
+
+
+### Use a different prefix
+```js
+const YourPlugin = require('../plugins/your_plugin.js');
+const DiscordBot = require('../src/discordbot.js');
+let token = 'your-token';
+let bot = new DiscordBot(token, plugins, {
+  prefix: '$'
+})
+bot.start();
+```
+
+
 
 
 ## TODO
