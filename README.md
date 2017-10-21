@@ -46,7 +46,6 @@ module.exports = HelloWorldPlugin;
 
 Add a constructor that specifies the types of Discord events this plugin will handle.
 ```js
-```js
 class HelloWorldPlugin {
   constructor() {
     this.supported_event_types = ['message'];
