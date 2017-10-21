@@ -1,3 +1,5 @@
+const Plugin = require('../plugin.js');
+
 // TODO: Finish implementing Poll plugin
 class PollPlugin {
   /*
@@ -23,6 +25,7 @@ class PollPlugin {
    }
    */
   constructor() {
+    this.supported_event_types = ['message'];
     this.polls = [];
     this.current_id = 0;
   }

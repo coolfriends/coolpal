@@ -1,7 +1,9 @@
 const http = require('http');
+const Plugin = require('../plugin.js');
 
-class WeatherPlugin {
+class WeatherPlugin extends Plugin {
   constructor() {
+    this.supported_event_types = ['message'];
     this.dentonWeatherOptions = {
       host: 'api.openweathermap.org',
       path: '/data/2.5/weather?id=4685907&units=Imperial&APPID=' + process.env.OPENWEATHER_API_KEY
