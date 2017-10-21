@@ -6,6 +6,7 @@ const default_config = {
 
 class TodoPlugin {
   constructor(config=default_config) {
+    this.supported_event_types = ['message'];
     this.db = new AWS.DynamoDB({region: config.aws_region});
   }
 
