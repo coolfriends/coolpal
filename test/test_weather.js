@@ -1,9 +1,7 @@
 const assert = require('assert');
-// To mock axios requests
 const axios = require('axios');
-const MockAdapter = require('axios-mock-adapter');
 
-const WeatherPlugin = require('../src/plugins/weather.js');
+const WeatherPlugin = require('../src/plugins/weather/plugin.js');
 
 describe('WeatherPlugin', function() {
   let plugin = new WeatherPlugin({
