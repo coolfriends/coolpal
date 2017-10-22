@@ -9,3 +9,4 @@ install:
 
 script:
   - node examples/run_discordbot.js
+  - npm test
