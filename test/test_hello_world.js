@@ -13,15 +13,20 @@ describe('HelloWorldPlugin', function() {
     }
   };
 
-  describe('support_event_types', function() {
-    it('should only have message for its supported event types', function() {
-      assert.deepEqual(plugin.supported_event_types, ['message']);
+  describe('#constructor()', function() {
+    describe('support_event_types', function() {
+      it('should only have message for its supported event types', function() {
+        assert.deepEqual(plugin.supported_event_types, ['message']);
+      });
     });
   });
+
   describe('#handle_event()', function() {
     it('should return true if event_type is message and message is not from bot', function() {
       let message_fixture = {
-        author: 'notthebotusername',
+        author: {
+          username: 'notthebotusername'
+        },
         content: '!helloworld',
         reply: () => {}
       };
@@ -35,7 +40,9 @@ describe('HelloWorldPlugin', function() {
     it('should return true if the message provided is properly formatted', function() {
       let recorded_message = '';
       let message_fixture = {
-        author: 'notthebotusername',
+        author: {
+          username: 'notthebotusername'
+        },
         content: '!helloworld,',
         reply: () => {}
       };
@@ -44,7 +51,9 @@ describe('HelloWorldPlugin', function() {
     it('should send a greeting to the user', function() {
       let recorded_message = '';
       let message_fixture = {
-        author: 'notthebotusername',
+        author: {
+          username: 'notthebotusername'
+        },
         content: '!helloworld,',
         reply: (message) => {
           recorded_message = message;
@@ -62,7 +71,9 @@ describe('HelloWorldPlugin', function() {
     it('should return true if the message is from the bot', function() {
       let message_fixture = {
         content: '!helloworld',
-        author: bot_user_name
+        author: {
+          username: bot_user_name
+        }
       };
       assert(plugin.handle_message(message_fixture, config_fixture));
     });
@@ -70,7 +81,9 @@ describe('HelloWorldPlugin', function() {
       let recorded_message = '';
       let message_fixture = {
         content: '!helloworld',
-        author: bot_user_name,
+        author: {
+          username: bot_user_name,
+        },
         reply: (message) => {
           recorded_message = message;
         }

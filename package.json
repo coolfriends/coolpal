@@ -12,9 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.54.0",
+    "axios": "^0.17.0",
     "discord.js": "^11.1.0"
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.9.0",
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
     "babel-preset-env": "^1.5.1",
