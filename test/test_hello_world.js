@@ -32,7 +32,7 @@ describe('HelloWorldPlugin', function() {
     });
   });
   describe('#handle_message()', function() {
-    it('should return true if the message with correct message', function() {
+    it('should return true if the message provided is properly formatted', function() {
       let recorded_message = '';
       let message_fixture = {
         author: 'notthebotusername',
@@ -53,7 +53,7 @@ describe('HelloWorldPlugin', function() {
       plugin.handle_message(message_fixture, config_fixture);
       assert.equal(recorded_message, 'Hello, world!');
     });
-    it('should return false if the message the command is not called', function() {
+    it('should return false if the message command is not called', function() {
       let message_fixture = {
         content: 'notthecommand'
       };
@@ -66,7 +66,7 @@ describe('HelloWorldPlugin', function() {
       };
       assert(plugin.handle_message(message_fixture, config_fixture));
     });
-    it('should not reply to the message if the event is from the bot', function() {
+    it('should not reply to the message if the message is from the bot', function() {
       let recorded_message = '';
       let message_fixture = {
         content: '!helloworld',
