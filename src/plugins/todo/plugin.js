@@ -1,3 +1,5 @@
+// TODO: Refactor this thing to work! Right now as a plugin it will certainly
+// not work
 const AWS = require('aws-sdk');
 
 const default_config = {

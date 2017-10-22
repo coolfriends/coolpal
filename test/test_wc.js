@@ -1,7 +1,9 @@
 const assert = require('assert');
-const WCPlugin = require('../src/plugins/wc.js');
+const WCPlugin = require('../src/plugins/wc/plugin.js');
 
 describe('WCPlugin', function() {
+  // TODO: Add test to make sure that axios logs when the url it was given
+  // doesnt work (bad env setup, etc) but don't send that to discord!
   let base_url = 'http://this_is_the_example.com/';
   let secret_key = 'this-is-a-very-secret-key';
   let plugin = new WCPlugin({

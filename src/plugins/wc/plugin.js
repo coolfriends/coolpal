@@ -1,6 +1,6 @@
 const querystring = require('querystring');
 const axios = require('axios');
-const utils = require('./utils.js');
+const utils = require('../utils.js');
 
 class WCPlugin {
   constructor(config={}) {

@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const PluginManager = require('./plugin_manager.js');
 
 // TODO:
 // Create parent plugin class
@@ -44,9 +43,9 @@ class DiscordBot {
     });
   }
 
-  _generate_event_types(plugins) {
+  _generate_event_types() {
     let unique_event_types = [];
-    for (let plugin of plugins) {
+    for (let plugin of this._plugins) {
       for (let event_type of plugin.supported_event_types) {
         if (!unique_event_types.includes(event_type)) {
           unique_event_types.push(event_type);
@@ -69,7 +68,7 @@ class DiscordBot {
   }
 
   _receive_events() {
-    for (let event_type of this.event_types) {
+    for (let event_type of this._event_types) {
       console.log(event_type);
       this._receive_event(event_type);
     }

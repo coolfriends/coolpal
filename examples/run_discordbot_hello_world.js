@@ -1,4 +1,4 @@
-const HelloWorldPlugin = require('../src/plugins/hello_world.js');
+const HelloWorldPlugin = require('../src/plugins/hello_world/plugin.js');
 const DiscordBot = require('../src/discordbot.js');
 
 let plugins = [

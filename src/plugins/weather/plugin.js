@@ -1,5 +1,5 @@
 const axios = require('axios');
-const utils = require('./utils.js');
+const utils = require('../utils.js');
 
 class WeatherPlugin {
   // User can provide an api key in config, or use the default env variable
