@@ -118,8 +118,12 @@ let bot = new DiscordBot(token, plugins, {
 bot.start();
 ```
 
-
-
+## Run the tests
+Make sure to run `npm install` to get the mocha dev dependency. 
+Then run the tests like so:
+```bash
+npm test
+```
 
 ## TODO
 * Create tests

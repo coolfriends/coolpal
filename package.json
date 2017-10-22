@@ -4,7 +4,7 @@
   "description": "",
   "main": "discordbot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "prestart": "rollup -c && gulp",
     "start": "node bin/bundle.min.js"
   },
@@ -25,6 +25,7 @@
     "gulp-exec": "^2.1.3",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.0",
+    "mocha": "^4.0.1",
     "rollup": "^0.43.0"
   }
 }

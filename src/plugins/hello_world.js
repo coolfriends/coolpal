@@ -12,11 +12,11 @@ class HelloWorldPlugin {
 
   handle_message(message, config) {
     // Make sure author of the message is not the bot
-    if (message.author != config.client.user.username) {
-      if (message.content.startsWith(config.prefix + 'helloworld')) {
+    if (message.content.startsWith(config.prefix + 'helloworld')) {
+      if (message.author != config.client.user.username) {
         message.reply("Hello, world!");
-        return true;
       }
+      return true;
     }
     return false;
   }
