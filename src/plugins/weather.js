@@ -1,4 +1,5 @@
-const http = require('http');
+const axios = require('axios');
+const utils = require('./utils.js');
 
 class WeatherPlugin {
   // User can provide an api key in config, or use the default env variable
@@ -6,16 +7,22 @@ class WeatherPlugin {
   constructor(config={}) {
     this.supported_event_types = ['message'];
     this.openweather_api_key = config.openweather_api_key || process.env.OPENWEATHER_API_KEY;
-    this.denton_weather_options = {
-      host: 'api.openweathermap.org',
-      path: '/data/2.5/weather?id=4685907&units=Imperial&APPID=' +
-            this.openweather_api_key
+    this.api_version = config.api_version || '2.5';
+    this.units = config.units || 'Imperial';
+    this.base_url = 'http://api.openweathermap.org';
+    this.city_ids = {
+      denton: '4685907',
+      seattle: '5809844'
     };
-    this.seattle_weather_options = {
-      host: 'api.openweathermap.org',
-      path: '/data/2.5/weather?id=5809844&units=Imperial&APPID=' +
-            this.openweather_api_key
-    };
+  }
+
+  weather_url(city) {
+    if (this.city_ids[city]) {
+      return this.base_url + '/data/2.5/weather?id=' +
+             this.city_ids[city] + '&units=' + this.units +
+             '&APPID=' + this.openweather_api_key;
+    }
+    return '';
   }
 
   handle_event(event_type, event, config) {
@@ -26,38 +33,65 @@ class WeatherPlugin {
   }
 
   handle_message(message, config) {
-    let weather_options = {};
-    if (message.content.startsWith(config.prefix + 'dentonweather')) {
-      weather_options = this.denton_weather_options;
-    } else if (message.content.startsWith(config.prefix + 'seattleweather')) {
-      weather_options = this.seattle_weather_options;
-    } else {
-      // Message not intended for this plugin
+    let command_args = utils.split_message(message);
+    if (command_args[0] != config.prefix + 'weather') {
       return false;
     }
-    let weather_callback = (response) => {
-      let str = '';
 
-      response.on('data', (chunk) => {
-        str += chunk;
-      });
+    // End run if the bot is the creator of the message
+    if (message.author.username == config.client.user.username) {
+      return true;
+    }
 
-      response.on('end', () => {
-        let responseJSON = JSON.parse(str);
-        if (responseJSON.cod == 200) {
-          message.reply("\nTemp: " +
-                        responseJSON.main.temp +
-                        " **|** Weather: " +
-                        responseJSON.weather[0].description +
-                        " **|** Wind: " +
-                        responseJSON.wind.speed);
-        } else if (responseJSON.cod == 401) {
-        }
-      });
-    };
+    let city = command_args[1];
+    if (!city) {
+      let choice_string = this.city_choice_string(config);
+      message.reply(
+        'No city provided. Try one of the following:\n' +
+        choice_string
+      );
+      return true;
+    }
 
-    http.request(weather_options, weather_callback).end();
+    let url = this.weather_url(city);
+    if (!url) {
+      let choice_string = this.city_choice_string(config);
+      message.reply(
+        'City: ' + utils.capitalize(city) +
+        ' is not supported at this time. Try:\n' +
+        choice_string
+      );
+      return true;
+    }
+    this.call_weather_api(message, url);
     return true;
+  }
+
+  call_weather_api(message, url, config={}) {
+    console.log(url);
+    axios({
+      method: 'get',
+      url: url
+    }).then(response => {
+      if (response.data.cod == 200) {
+        message.reply("\nTemp: " +
+                      response.data.main.temp +
+                      " **|** Weather: " +
+                      response.data.weather[0].description +
+                      " **|** Wind: " +
+                      response.data.wind.speed);
+      }
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+
+  city_choice_string(config) {
+    let city_choice_string = '';
+    for (let key of Object.keys(this.city_ids)) {
+      city_choice_string += config.prefix + 'weather ' + key + '\n';
+    }
+    return city_choice_string;
   }
 };
 
