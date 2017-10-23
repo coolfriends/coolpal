@@ -1,5 +1,5 @@
 const axios = require('axios');
-const utils = require('./utils.js');
+const utils = require('../utils.js');
 
 class WeatherPlugin {
   // User can provide an api key in config, or use the default env variable
@@ -68,7 +68,6 @@ class WeatherPlugin {
   }
 
   call_weather_api(message, url, config={}) {
-    console.log(url);
     axios({
       method: 'get',
       url: url
@@ -82,7 +81,7 @@ class WeatherPlugin {
                       response.data.wind.speed);
       }
     }).catch(error => {
-      console.log(error);
+      console.log("Error with weather api");
     });
   }
 

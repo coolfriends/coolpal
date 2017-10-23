@@ -1,5 +1,5 @@
 const assert = require('assert');
-const HelloWorldPlugin = require('../src/plugins/hello_world.js');
+const HelloWorldPlugin = require('../src/plugins/hello_world/plugin.js');
 
 describe('HelloWorldPlugin', function() {
   let plugin = new HelloWorldPlugin();

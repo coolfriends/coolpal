@@ -1,5 +1,5 @@
-const TodoPlugin = require('../src/plugins/todo.js');
-const WeatherPlugin = require('../src/plugins/weather.js');
+const TodoPlugin = require('../src/plugins/todo/plugin.js');
+const WeatherPlugin = require('../src/plugins/weather/plugin.js');
 const DiscordBot = require('../src/discordbot.js');
 
 // TODO: Implement a host variable for todo plugin for local dynamodb. Also
