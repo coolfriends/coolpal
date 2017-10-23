@@ -4,9 +4,9 @@
   "description": "",
   "main": "discordbot.js",
   "scripts": {
+    "bundle": "rollup --config rollup.config.dev.js && rollup --config rollup.config.prod.js && gulp",
     "test": "mocha",
-    "prestart": "rollup -c && gulp",
-    "start": "node bin/bundle.min.js"
+    "start": "node bin/prod_bundle.min.js"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +27,7 @@
     "gulp-exec": "^2.1.3",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
     "mocha": "^4.0.1",
     "rollup": "^0.43.0"
   }

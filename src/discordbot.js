@@ -52,7 +52,7 @@ class DiscordBot {
   // Minimum config to get plugins to work is client and prefix
   _receive_event(event_type) {
     this.client.on(event_type, event => {
-      for (let plugin of this.plugins) {
+      for (let plugin of this._plugins) {
         let handled_event = plugin.handle_event(event_type, event, {
           client: this.client,
           prefix: this.prefix
