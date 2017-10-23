@@ -26,12 +26,6 @@ class DiscordBot {
     this._generate_event_types();
   }
 
-  register_plugins(plugins) {
-    for (let plugin of plugins) {
-      this.register_plugin(plugin);
-    }
-  }
-
   _login() {
     this.client.login(this.discord_token);
   }
