@@ -18,15 +18,19 @@ git clone https://github.com/kbougy/discordbot.git
 Install globally with your package manager, or use nvm:
 https://github.com/creationix/nvm
 
-### Download dependancies
+### Download dependencies
 ```bash
 npm install
 ```
 
 ## Usage
-Run the example
+Run bundle steps
 ```bash
-node examples/run_discordbot.js
+npm run bundle
+```
+Run bot
+```bash
+npm start
 ```
 
 Demonstrate displaying polls in a tabular format
