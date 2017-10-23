@@ -8,5 +8,5 @@ install:
   - npm install
 
 script:
-  - node examples/run_discordbot.js
+  - npm start
   - npm test
