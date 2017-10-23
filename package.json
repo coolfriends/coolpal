@@ -4,8 +4,8 @@
   "description": "",
   "main": "discordbot.js",
   "scripts": {
+    "bundle": "rollup --config rollup.config.dev.js && rollup --config rollup.config.prod.js && gulp",
     "test": "mocha",
-    "prestart": "rollup --config rollup.config.dev.js && rollup --config rollup.config.prod.js && gulp",
     "start": "node bin/prod_bundle.min.js"
   },
   "author": "",
