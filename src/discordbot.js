@@ -23,7 +23,12 @@ class DiscordBot {
 
   register_plugin(plugin) {
     this._plugins.push(plugin);
-    this._generate_event_types();
+
+    for (let event_type of plugin.supported_event_types) {
+      if (!this._event_types.includes(event_type)) {
+        this._event_types.push(event_type);
+      }
+    }
   }
 
   _login() {

@@ -2,18 +2,55 @@ const axios = require('axios');
 const utils = require('../utils.js');
 
 class WeatherPlugin {
-  // User can provide an api key in config, or use the default env variable
-  // OPENWEATHER_API_KEY
   constructor(config={}) {
+    /**
+     * The event types this plugin supports
+     * @type {string[]}
+     */
     this.supported_event_types = ['message'];
+
+    /**
+     * The api key used to access the OpenWeather API
+     * @see http://openweathermap.org/appid
+     * @type {string}
+     */
     this.openweather_api_key = config.openweather_api_key || process.env.OPENWEATHER_API_KEY;
+
+    /**
+     * The version number for the OpenWeather API. There does not seem to be a
+     * list of available version numbers
+     * @see http://openweathermap.org/appid
+     * @type {string}
+     */
     this.api_version = config.api_version || '2.5';
-    this.units = config.units || 'Imperial';
+
+    /**
+     * The units for fields on the OpenWeather API.
+     * @type {string}
+     */
+    this.units = config.units || 'imperial';
+
+    /**
+     * The api url for OpenWeather API
+     * @type {string}
+     */
     this.base_url = 'http://api.openweathermap.org';
+
+    /**
+     * Supported city ids and their corredsponding code for OpenWeather API
+     * @type {Object}
+     */
     this.city_ids = {
       denton: '4685907',
       seattle: '5809844'
     };
+
+    /**
+     * A configured axios client for making HTTP requests. This is also used
+     * in tests to mock axios HTTP requests.
+     * @type {axios}
+     */
+    this.axios = config.axios || axios.create();
   }
 
   weather_url(city) {
@@ -63,12 +100,13 @@ class WeatherPlugin {
       );
       return true;
     }
-    this.call_weather_api(message, url);
+
+    this.call_weather_api(message, url, config);
     return true;
   }
 
   call_weather_api(message, url, config={}) {
-    axios({
+    this.axios({
       method: 'get',
       url: url
     }).then(response => {
@@ -80,8 +118,11 @@ class WeatherPlugin {
                       " **|** Wind: " +
                       response.data.wind.speed);
       }
+      return true;
     }).catch(error => {
-      console.log("Error with weather api");
+      // TODO: Handle this error
+      console.log();
+      return true;
     });
   }
 
