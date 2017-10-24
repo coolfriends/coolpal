@@ -1,8 +1,13 @@
-sudo: false
+sudo: required
 language: node_js
 node_js:
   - 'node'
   - '8'
+
+before_install:
+  - docker build -t dannykraft/discordbot .
+  - docker run -d -p dannykraft/discordbot /bin/sh -c "cd ~/discordbot; npm start;"
+  - docker ps -a
 
 install:
   - npm install
