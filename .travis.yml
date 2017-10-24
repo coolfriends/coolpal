@@ -6,7 +6,7 @@ node_js:
 
 before_install:
   - docker build -t dannykraft/discordbot .
-  - docker run -d -p dannykraft/discordbot /bin/sh -c "cd ~/discordbot; npm start;"
+  - docker run -d dannykraft/discordbot /bin/sh -c "cd ~/discordbot; npm start;"
   - docker ps -a
 
 install:
