@@ -4,19 +4,36 @@ const axios = require('axios');
 const WeatherPlugin = require('../src/plugins/weather/plugin.js');
 
 describe('WeatherPlugin', function() {
+  // Override opeanweather api key
+  process.env.OPENWEATHER_API_KEY = 'also-not-a-real-api-key';
+
   let plugin = new WeatherPlugin({
     openweather_api_key: 'not-a-real-api-key'
   });
+
   let config_fixture = {
     prefix: '!',
     client: {
       user: {
         username: 'abot'
       }
-    }
+    },
+    axios: {}
   };
-  // Temporarily override api key
-  process.env.OPENWEATHER_API_KEY = 'also-not-a-real-api-key';
+
+  // Returns a function that acts like axios and can be called.
+  // The response is the response you'd like to be resolved.
+  // If error is provided, the function will reject the error.
+  let build_axios_mock = (response, error) => {
+    return () => {
+      return new Promise((resolve, reject) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(response);
+      });
+    };
+  };
 
   describe('#constructor()', function() {
     describe('supported_event_types', function() {
@@ -68,7 +85,7 @@ describe('WeatherPlugin', function() {
       let expected = 'http://api.openweathermap.org' +
                      '/data/2.5/weather?id=' +
                      example_city_id +
-                     '&units=Imperial&APPID=' +
+                     '&units=imperial&APPID=' +
                      'not-a-real-api-key';
       assert.equal(expected, plugin.weather_url('example_city'));
     });
@@ -193,8 +210,33 @@ describe('WeatherPlugin', function() {
 
       assert(plugin.handle_message(message_fixture, config_fixture));
     });
-    // TODO: Finish implementing this test
+
     it('should reply with weather data when message is correct', function() {
+      let response = {
+        data: {
+          cod: 200,
+          main: {
+            temp: '70'
+          },
+          weather: [
+            {
+              description: 'sunny'
+            }
+          ],
+          wind: {
+            speed: '10'
+          }
+        }
+      };
+
+      let axios_mock = build_axios_mock(response);
+      let plugin = new WeatherPlugin({
+        openweather_api_key: 'not-a-real-api-key',
+        axios: axios_mock
+      });
+
+
+      // Make sure that the string passed to message.reply is captured.
       let recorded_message = '';
       let message_fixture = {
         content: '!weather denton',
@@ -205,6 +247,20 @@ describe('WeatherPlugin', function() {
           recorded_message = message;
         }
       };
+
+      let expected = "\nTemp: " +
+                     response.data.main.temp +
+                     " **|** Weather: " +
+                     response.data.weather[0].description +
+                     " **|** Wind: " +
+                     response.data.wind.speed;
+
+      plugin.handle_message(message_fixture, config_fixture);
+
+      // wait 1 seconds to make sure the message gets recorded
+      setTimeout(() => {
+        assert.equal(recorded_message, expected);
+      }, 1);
     });
   });
 });

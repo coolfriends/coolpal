@@ -54,7 +54,8 @@ class WCPlugin {
                   data.most_common.count + " occurences.";
       message.reply(reply);
     }).catch(error => {
-      console.log(error);
+      // TODO: Handle this error
+      console.log();
     });
   }
 }
