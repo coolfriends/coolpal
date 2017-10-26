@@ -9,6 +9,11 @@ module.exports = {
   },
   capitalize: (word) => {
     return word.charAt(0).toUpperCase() + word.slice(1);
+  },
+  times: (n) => {
+    return (f) => {
+      Array(n).fill().map((_, i) => f(i));
+    };
   }
 };
 
