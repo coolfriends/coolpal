@@ -2,6 +2,7 @@ const utils = require('../utils.js');
 
 class SpamPlugin {
   constructor() {
+    this.command = 'spam';
     this.supported_event_types = ['message'];
   }
 

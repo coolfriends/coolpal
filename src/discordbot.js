@@ -1,24 +1,41 @@
 const Discord = require('discord.js');
+const plugin_name_to_class = require('./plugins/index.js').name_to_class;
 
 // TODO:
 // Create parent plugin class
 // Add more locations for weather
 // Add more functionality for todo list
 class DiscordBot {
-  constructor(token, plugins, options={}) {
+  constructor(config={}) {
+    this.config = config;
     this.client = new Discord.Client();
-    this.discord_token = token || options.token;
-    this._plugins = plugins || options.plugins;
+    this.discord_token = this.config.token;
     this._event_types = [];
-    this.prefix = options.prefix || '!';
+    this._plugins = this._configure_plugins(this.config.plugins);
+    this.prefix = this.config.prefix || '!';
+  }
 
-    this._generate_event_types();
+  get plugins() {
+    return this._plugins;
   }
 
   start() {
     this._login();
     this._ready();
     this._receive_events();
+  }
+
+  _configure_plugin(plugin_config) {
+    let plugin_class = plugin_name_to_class[plugin_config.name];
+    return new plugin_class(plugin_config.configuration);
+  }
+
+  _configure_plugins(plugins_config) {
+    let configured_plugins = [];
+    for (let plugin of plugins_config) {
+      configured_plugins.push(this._configure_plugin(plugin));
+    }
+    return configured_plugins;
   }
 
   register_plugin(plugin) {

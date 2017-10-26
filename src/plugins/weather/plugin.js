@@ -4,6 +4,11 @@ const utils = require('../utils.js');
 class WeatherPlugin {
   constructor(config={}) {
     /**
+     * The name for this command
+     */
+    this.command = 'weather';
+
+    /**
      * The event types this plugin supports
      * @type {string[]}
      */

@@ -1,16 +1,17 @@
-const TodoPlugin = require('../src/plugins/todo/plugin.js');
-const WeatherPlugin = require('../src/plugins/weather/plugin.js');
+const fs = require('fs');
 const DiscordBot = require('../src/discordbot.js');
 
 // TODO: Implement a host variable for todo plugin for local dynamodb. Also
 // add optional variables to access key and secret key
-let plugins = [
-  new TodoPlugin({
-    'aws_region': 'us-west-2'
-  }),
-  new WeatherPlugin
-];
+fs.readFile('plugin_configuration.json', (err, data) => {
+  if (err) {
+    throw err;
+  }
+  let configuration = JSON.parse(data);
 
-let token = process.env.DISCORD_TOKEN;
-let bot = new DiscordBot(token, plugins);
-bot.start();
+  let token = process.env.DISCORD_TOKEN;
+  configuration.token = token;
+
+  let bot = new DiscordBot(configuration);
+  bot.start();
+});
