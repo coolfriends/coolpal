@@ -4,6 +4,7 @@ const utils = require('../utils.js');
 
 class WCPlugin {
   constructor(config={}) {
+    this.command = 'wc';
     this.supported_event_types = ['message'];
     this.base_url = config.base_url || process.env.WC_URL;
     this.wc_secret_key = config.wc_secret_key || process.env.WC_SECRET_KEY;

@@ -1,0 +1,13 @@
+{
+  "token": "example_token",
+  "plugins": [
+    {
+      "name": "helloworld",
+      "configuration": {}
+    },
+    {
+      "name": "spam",
+      "configuration": {}
+    }
+  ]
+}

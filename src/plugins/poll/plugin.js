@@ -23,6 +23,7 @@ class PollPlugin {
    }
    */
   constructor() {
+    this.command = 'poll';
     this.supported_event_types = ['message'];
     this.polls = [];
     this.current_id = 0;

@@ -1,5 +1,6 @@
 class HelloWorldPlugin {
   constructor() {
+    this.command = 'helloworld';
     this.supported_event_types = ['message'];
   }
 
@@ -10,9 +11,13 @@ class HelloWorldPlugin {
     return false;
   }
 
+  prefixed_command(config) {
+    return config.prefix + this.command;
+  }
+
   handle_message(message, config) {
     // Make sure author of the message is not the bot
-    if (message.content.startsWith(config.prefix + 'helloworld')) {
+    if (message.content.startsWith(this.prefixed_command(config))) {
       if (message.author.username != config.client.user.username) {
         message.reply("Hello, world!");
       }
