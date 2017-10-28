@@ -16,3 +16,7 @@ script:
 
 after_success:
   - scripts/docker_push.sh
+
+matrix:
+  allow_failures:
+    - after_success: scripts/docker_push.sh
