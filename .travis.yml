@@ -4,11 +4,6 @@ node_js:
   - 'node'
   - '8'
 
-before_install:
-  - docker build -t discordbot .
-  - docker run -d discordbot /bin/sh -c "cd ~/discordbot; npm install; npm run bundle; npm start;"
-  - docker ps -a
-
 install:
   - npm install
 
