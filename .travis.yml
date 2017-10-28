@@ -4,9 +4,15 @@ node_js:
   - 'node'
   - '8'
 
+services:
+  - docker
+
 install:
   - npm install
 
 script:
   - npm run bundle
   - npm test
+
+after_success:
+  - scripts/docker_push.sh
