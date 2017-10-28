@@ -1,6 +1,5 @@
 export default {
-  entry: 'examples/run_discordbot',
+  entry: 'examples/run_discordbot.js',
   format: 'cjs',
-  dest: 'bin/prod_bundle.js',
-  external: ['discord.js', 'http', 'aws-sdk']
+  dest: 'bin/prod_bundle.js'
 };

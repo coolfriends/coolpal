@@ -11,8 +11,9 @@ class DiscordBot {
     this.client = new Discord.Client();
     this.discord_token = this.config.token;
     this._event_types = [];
-    this._plugins = this._configure_plugins(this.config.plugins);
+    this._plugins = [];
     this.prefix = this.config.prefix || '!';
+    this._configure_plugins(this.config.plugins);
   }
 
   get plugins() {
@@ -31,11 +32,9 @@ class DiscordBot {
   }
 
   _configure_plugins(plugins_config) {
-    let configured_plugins = [];
     for (let plugin of plugins_config) {
-      configured_plugins.push(this._configure_plugin(plugin));
+      this.register_plugin(this._configure_plugin(plugin));
     }
-    return configured_plugins;
   }
 
   register_plugin(plugin) {
