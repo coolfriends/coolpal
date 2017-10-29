@@ -15,7 +15,7 @@ script:
   - npm test
 
 after_success:
-  - scripts/docker_push.sh
+  - source scripts/docker_push.sh
 
 matrix:
   allow_failures:
