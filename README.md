@@ -1,5 +1,5 @@
 # Discordbot
-[![Build Status](https://travis-ci.org/coolfriends/discordbot.svg?branch=update-readme)](https://travis-ci.org/coolfriends/discordbot)
+[![Build Status](https://travis-ci.org/coolfriends/discordbot.svg?branch=master)](https://travis-ci.org/coolfriends/discordbot)
 Discord bot equipped with a simple plugin architecture.
 
 ## Installation
