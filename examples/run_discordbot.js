@@ -3,7 +3,7 @@ const DiscordBot = require('../src/discordbot.js');
 
 // TODO: Implement a host variable for todo plugin for local dynamodb. Also
 // add optional variables to access key and secret key
-fs.readFile('plugin_configuration.json', (err, data) => {
+fs.readFile('examples/plugin_configuration.json', (err, data) => {
   if (err) {
     throw err;
   }

@@ -4,10 +4,8 @@ node_js:
   - 'node'
   - '8'
 
-before_install:
-  - docker build -t dannykraft/discordbot .
-  - docker run -d dannykraft/discordbot /bin/sh -c "cd ~/discordbot; npm start;"
-  - docker ps -a
+services:
+  - docker
 
 install:
   - npm install
@@ -15,3 +13,10 @@ install:
 script:
   - npm run bundle
   - npm test
+
+after_success:
+  - source scripts/docker_push.sh
+
+matrix:
+  allow_failures:
+    - after_success: scripts/docker_push.sh

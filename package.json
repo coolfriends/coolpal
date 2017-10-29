@@ -4,14 +4,14 @@
   "description": "",
   "main": "discordbot.js",
   "scripts": {
-    "bundle": "rollup --config rollup.config.dev.js && rollup --config rollup.config.prod.js && gulp",
+    "bundle": "rollup --config rollup.config.dev.js && rollup --config rollup.config.prod.js && gulp && cp examples/plugin_configuration.json bin",
     "test": "mocha",
     "start": "node bin/prod_bundle.min.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.54.0",
+    "aws-sdk": "^2.141.0",
     "axios": "^0.17.0",
     "discord.js": "^11.1.0"
   },

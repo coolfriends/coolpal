@@ -17,7 +17,7 @@ gulp.task("js_dev", function () {
 });
 
 gulp.task("js_prod", function () {
-  return gulp.src('examples/run_discordbot_hello_world_and_weather.js')
+  return gulp.src('bin/prod_bundle.js')
     .pipe(babel())
     .pipe(uglify())
     .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })

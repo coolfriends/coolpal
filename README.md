@@ -145,5 +145,6 @@ npm test
 * Change plugin interface where DiscordBot splits the incoming message into a command and args,
   and passes to plugins accordingly (by command name)
 * Add prefix support
+* Write test that ensures when discordbot instance is created with correct configuration, the _event_types variable receives events
   
 
