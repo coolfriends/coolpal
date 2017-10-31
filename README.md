@@ -1,41 +1,55 @@
 # Discordbot
-[![Build Status](https://travis-ci.org/coolfriends/discordbot.svg?branch=master)](https://travis-ci.org/coolfriends/discordbot)
+[![Build Status](https://travis-ci.org/coolfriends/discordbot.svg?branch=update-readme)](https://travis-ci.org/coolfriends/discordbot)
 Discord bot equipped with a simple plugin architecture.
 
-## Installation
+## Download repo and install dependencies
 
 ### Requirements
 * node v8.0.0 or greater
-* npm dependancies
-
-### Download project
-
-```bash
-git clone https://github.com/kbougy/discordbot.git
-```
+* npm dependencies
 
 ### Install node v8.0.0 or greater
 Install globally with your package manager, or use nvm:
 https://github.com/creationix/nvm
+
+### Download project & change directories
+```bash
+git clone https://github.com/coolfriends/discordbot.git
+cd discordbot
+```
 
 ### Download dependencies
 ```bash
 npm install
 ```
 
-## Usage
+### Run discordbot on local machine
 Run bundle steps
 ```bash
 npm run bundle
 ```
+
 Run bot
 ```bash
 npm start
 ```
 
-Demonstrate displaying polls in a tabular format
+### Build docker image and run discordbot in container
+Make sure you have docker installed: https://docs.docker.com/engine/installation/
+
+Build image from Dockerfile
 ```bash
-node examples/run_print_poll_list.js
+docker build --no-cache -t discordbot .
+```
+
+Run container in detached mode
+```bash
+docker run -d discordbot
+```
+
+Run container and enter shell
+```bash
+docker run -it discordbot
 ```
 
 ## Development
