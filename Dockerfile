@@ -10,4 +10,4 @@ RUN apt-get install -y \
 RUN git clone https://github.com/coolfriends/discordbot.git
 RUN cd /discordbot && npm install && npm install -g rollup gulp
 RUN cd /discordbot && rollup --config rollup.config.dev.js && rollup --config rollup.config.prod.js && gulp
-RUN cd /discordbot && npm start
+CMD cd /discordbot && npm start
