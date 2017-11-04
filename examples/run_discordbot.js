@@ -9,8 +9,7 @@ fs.readFile('examples/plugin_configuration.json', (err, data) => {
   }
   let configuration = JSON.parse(data);
 
-  let token = process.env.DISCORD_TOKEN;
-  configuration.token = token;
+  let token = configuration.token;
 
   let bot = new DiscordBot(configuration);
   bot.start();
