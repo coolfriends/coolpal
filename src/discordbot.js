@@ -6,7 +6,7 @@ const plugin_name_to_class = require('./plugins/index.js').name_to_class;
 // Add more locations for weather
 // Add more functionality for todo list
 class DiscordBot {
-  constructor(config={}) {
+  constructor(config = {}) {
     this.config = config;
     this.client = new Discord.Client();
     this.discord_token = this.config.token;
