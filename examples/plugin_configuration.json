@@ -1,0 +1,19 @@
+{
+  "token": "Mzc0NzQ1MTM3Njk3MzkwNTky.DNlxUw.MdFMYd4nCq2BxAsSiPa_zQTPFtI",
+  "plugins": [
+    {
+      "name": "helloworld",
+      "configuration": {}
+    },
+    {
+      "name": "spam",
+      "configuration": {}
+    },
+    {
+      "name": "weather",
+      "configuration": {
+        "openweather_api_key": "d7f4aebada4db519da8a383c9c79b961"
+      }
+    }
+  ]
+}
