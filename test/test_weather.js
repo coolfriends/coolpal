@@ -119,28 +119,6 @@ describe('WeatherPlugin', function() {
 
       assert(plugin.handle_message(message_fixture, config_fixture));
     });
-    it('should reply with an informative message when unsupported city provided', function() {
-      let plugin = new WeatherPlugin;
-      plugin.city_ids = {
-        example_city: 'some_fake_id'
-      };
-
-      let recorded_message = '';
-      let message_fixture = {
-        content: '!weather this_city_is_not_supported',
-        author: {
-          username: 'notabot'
-        },
-        reply: (message) => {
-          recorded_message = message;
-        }
-      };
-      let expected = 'City: This_city_is_not_supported is not supported at this time. Try:\n' +
-        '!weather example_city\n';
-
-      plugin.handle_message(message_fixture, config_fixture);
-      assert.equal(recorded_message, expected);
-    });
     it('should return true if message is correct', function() {
       let message_fixture = {
         content: '!weather denton',
