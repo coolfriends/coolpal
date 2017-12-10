@@ -17,6 +17,10 @@
     {
       "name": "bitcoin",
       "configuration": {}
+    },
+    {
+      "name": "ethereum",
+      "configuration": {}
     }
   ]
 }
