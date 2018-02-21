@@ -5,6 +5,8 @@
   "main": "coolpal.js",
   "scripts": {
     "bundle": "rollup --config rollup.config.dev.js && rollup --config rollup.config.prod.js && gulp && cp examples/plugin_configuration.json bin",
+    "coverage": "istanbul cover _mocha",
+    "coveralls": "npm run coverage -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "test": "mocha",
     "start": "node bin/prod_bundle.min.js"
   },
@@ -21,6 +23,7 @@
     "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
     "babel-preset-env": "^1.5.1",
     "cb": "^0.1.0",
+    "coveralls": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
@@ -28,7 +31,9 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
+    "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
+    "mocha-lcov-reporter": "^1.3.0",
     "rollup": "^0.43.0"
   }
 }
