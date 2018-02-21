@@ -1,6 +1,6 @@
 {
   "name": "coolpal",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "main": "coolpal.js",
   "scripts": {
@@ -8,8 +8,8 @@
     "test": "mocha",
     "start": "node bin/prod_bundle.min.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "coolfriends",
+  "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.141.0",
     "axios": "^0.17.0",
