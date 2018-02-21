@@ -8,7 +8,8 @@
     "coverage": "istanbul cover _mocha",
     "coveralls": "npm run coverage -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "test": "mocha",
-    "start": "node bin/prod_bundle.min.js"
+    "start": "node bin/prod_bundle.min.js",
+    "docs": "jsdoc -d ./docs src/coolpal.js README.md"
   },
   "author": "coolfriends",
   "license": "MIT",
@@ -32,6 +33,7 @@
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "istanbul": "^0.4.5",
+    "jsdoc": "^3.5.5",
     "mocha": "^4.0.1",
     "mocha-lcov-reporter": "^1.3.0",
     "rollup": "^0.43.0"
