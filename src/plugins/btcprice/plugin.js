@@ -38,5 +38,4 @@ class BitcoinPlugin {
   }
 };
 
-
 module.exports = BitcoinPlugin;
