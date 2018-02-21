@@ -1,11 +1,11 @@
 const fs = require('fs');
 const assert = require('assert');
-const DiscordBot = require('../src/discordbot.js');
+const CoolPal = require('../src/coolpal.js');
 
 
-describe('DiscordBot', function() {
+describe('CoolPal', function() {
   it('can load plugins using an Object', function() {
-    let bot = new DiscordBot({
+    let bot = new CoolPal({
       token: 'example-token',
       plugins: [
         {
@@ -33,7 +33,7 @@ describe('DiscordBot', function() {
         throw err;
       }
       let configuration = JSON.parse(data);
-      let bot = new DiscordBot(configuration);
+      let bot = new CoolPal(configuration);
       for (let plugin of bot._plugins) {
         found_commands.push(plugin.command);
       }
