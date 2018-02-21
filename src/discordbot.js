@@ -1,10 +1,6 @@
 const Discord = require('discord.js');
 const plugin_name_to_class = require('./plugins/index.js').name_to_class;
 
-// TODO:
-// Create parent plugin class
-// Add more locations for weather
-// Add more functionality for todo list
 class DiscordBot {
   constructor(config = {}) {
     this.config = config;
