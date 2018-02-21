@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>CoolPal</h1><p>A cool pal ready to hang out in your Discord server</p>
+<p><a href="https://travis-ci.org/coolfriends/coolpal"><img src="https://travis-ci.org/coolfriends/coolpal.svg?branch=master" alt="Build Status"></a>
+<a href="https://coveralls.io/github/coolfriends/coolpal?branch=master"><img src="https://coveralls.io/repos/github/coolfriends/coolpal/badge.svg?branch=master" alt="Coverage Status"></a>
+ <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></p>
+<h2>Download repo and install dependencies</h2><h3>Requirements</h3><ul>
+<li>node v8.0.0 or greater</li>
+<li>npm dependencies</li>
+</ul>
+<h3>Install node v8.0.0 or greater</h3><p>Install globally with your package manager, or use nvm:
+https://github.com/creationix/nvm</p>
+<h3>Download project &amp; change directories</h3><pre class="prettyprint source lang-bash"><code>git clone https://github.com/coolfriends/coolpal.git
+cd coolpal</code></pre><h3>Download dependencies</h3><pre class="prettyprint source lang-bash"><code>npm install</code></pre><h3>Run coolpal on local machine</h3><p>Run bundle steps</p>
+<pre class="prettyprint source lang-bash"><code>npm run bundle</code></pre><p>Run bot</p>
+<pre class="prettyprint source lang-bash"><code>npm start</code></pre><h3>Build docker image and run coolpal in container</h3><p>Make sure you have docker installed: https://docs.docker.com/engine/installation/</p>
+<p>Build image from Dockerfile</p>
+<pre class="prettyprint source lang-bash"><code>docker build --no-cache -t coolpal .</code></pre><p>Run container in detached mode</p>
+<pre class="prettyprint source lang-bash"><code>docker run -d coolpal</code></pre><p>Run container and enter shell</p>
+<pre class="prettyprint source lang-bash"><code>docker run -it coolpal</code></pre><h2>Development</h2><h3>Create a new plugin</h3><p>In src/plugins, create hello_world.js</p>
+<pre class="prettyprint source lang-js"><code>class HelloWorldPlugin {
+}
+
+module.exports = HelloWorldPlugin;</code></pre><p>Add a constructor that specifies the types of discord events this plugin will handle.</p>
+<pre class="prettyprint source lang-js"><code>class HelloWorldPlugin {
+  constructor() {
+    this.supported_event_types = ['message'];
+  }
+}
+...</code></pre><p>Then create a handle_event function. This function will return true if the
+plugin is supposed to handle the event. It serves as an entry point to functions
+that do work.</p>
+<pre class="prettyprint source lang-js"><code>class HelloWorldPlugin {
+  ...
+  handle_event(event_type, event, config) {
+    if (event_type == 'message') {
+      return this.handle_message(event, config);
+    }
+    return false;
+  }
+}
+...</code></pre><p>Finally, implement the handle_message function that takes the event and a
+configuration file (passed in from <code>CoolPal.receive_event</code>).</p>
+<pre class="prettyprint source lang-js"><code>class HelloWorldPlugin {
+  ...
+  handle_message(message, config) {
+    // Make sure author of the message is not the bot
+    if (message.author != config.client.user.username) {
+      if (message.content.startsWith(config.prefix + 'helloworld')) {
+        message.reply(&quot;Hello, world!&quot;);
+        return true;
+      }
+    }
+    // Make sure to return false if this plugin is not designed to handle the
+    // message passed in.
+    return false;
+  }
+}
+...</code></pre><h3>Use the <code>HelloWorldPlugin</code></h3><pre class="prettyprint source lang-js"><code>const HelloWorldPlugin = require('../src/plugins/hello_world.js');
+const CoolPal = require('../src/coolpal.js');
+
+let plugins = [
+  new HelloWorldPlugin
+];
+
+let token = process.env.DISCORD_TOKEN;
+let bot = new CoolPal(token, plugins);
+bot.start();</code></pre><h3>Use a different prefix</h3><pre class="prettyprint source lang-js"><code>const YourPlugin = require('../plugins/your_plugin.js');
+const CoolPal = require('../src/coolpal.js');
+let token = 'your-token';
+let bot = new CoolPal(token, plugins, {
+  prefix: '$'
+})
+bot.start();</code></pre><h2>Run the tests</h2><p>Make sure to run <code>npm install</code> to get the mocha dev dependency. 
+Then run the tests like so:</p>
+<pre class="prettyprint source lang-bash"><code>npm test</code></pre></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CoolPal.html">CoolPal</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Feb 21 2018 03:40:40 GMT-0600 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
