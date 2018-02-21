@@ -1,12 +1,25 @@
 {
-  "token": "example_token",
-  "plugins": [
-    {
+  "token": "",
+  "plugins": [{
       "name": "helloworld",
       "configuration": {}
     },
     {
       "name": "spam",
+      "configuration": {}
+    },
+    {
+      "name": "weather",
+      "configuration": {
+        "openweather_api_key": ""
+      }
+    },
+    {
+      "name": "bitcoin",
+      "configuration": {}
+    },
+    {
+      "name": "ethereum",
       "configuration": {}
     }
   ]

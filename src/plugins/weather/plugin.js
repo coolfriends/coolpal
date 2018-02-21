@@ -2,7 +2,7 @@ const axios = require('axios');
 const utils = require('../utils.js');
 
 class WeatherPlugin {
-  constructor(config={}) {
+  constructor(config = {}) {
     /**
      * The name for this command
      */
@@ -42,15 +42,6 @@ class WeatherPlugin {
     this.base_url = 'http://api.openweathermap.org';
 
     /**
-     * Supported city ids and their corredsponding code for OpenWeather API
-     * @type {Object}
-     */
-    this.city_ids = {
-      denton: '4685907',
-      seattle: '5809844'
-    };
-
-    /**
      * A configured axios client for making HTTP requests. This is also used
      * in tests to mock axios HTTP requests.
      * @type {axios}
@@ -59,12 +50,7 @@ class WeatherPlugin {
   }
 
   weather_url(city) {
-    if (this.city_ids[city]) {
-      return this.base_url + '/data/2.5/weather?id=' +
-             this.city_ids[city] + '&units=' + this.units +
-             '&APPID=' + this.openweather_api_key;
-    }
-    return '';
+    return this.base_url + '/data/2.5/weather?q=' + city + '&units=' + this.units + '&APPID=' + this.openweather_api_key;
   }
 
   handle_event(event_type, event, config) {
@@ -110,18 +96,18 @@ class WeatherPlugin {
     return true;
   }
 
-  call_weather_api(message, url, config={}) {
+  call_weather_api(message, url, config = {}) {
     this.axios({
       method: 'get',
       url: url
     }).then(response => {
       if (response.data.cod == 200) {
         message.reply("\nTemp: " +
-                      response.data.main.temp +
-                      " **|** Weather: " +
-                      response.data.weather[0].description +
-                      " **|** Wind: " +
-                      response.data.wind.speed);
+          response.data.main.temp +
+          " **|** Weather: " +
+          response.data.weather[0].description +
+          " **|** Wind: " +
+          response.data.wind.speed);
       }
       return true;
     }).catch(error => {
