@@ -16,6 +16,7 @@ script:
 
 after_success:
   - source scripts/docker_push.sh
+  - npm run coveralls
 
 matrix:
   allow_failures:
