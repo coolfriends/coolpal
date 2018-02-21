@@ -1,8 +1,8 @@
 {
-  "name": "discordbot",
+  "name": "coolpal",
   "version": "1.0.0",
   "description": "",
-  "main": "discordbot.js",
+  "main": "coolpal.js",
   "scripts": {
     "bundle": "rollup --config rollup.config.dev.js && rollup --config rollup.config.prod.js && gulp && cp examples/plugin_configuration.json bin",
     "test": "mocha",

@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const plugin_name_to_class = require('./plugins/index.js').name_to_class;
 
-class DiscordBot {
+class CoolPal {
   constructor(config = {}) {
     this.config = config;
     this.client = new Discord.Client();
@@ -86,4 +86,4 @@ class DiscordBot {
   }
 };
 
-module.exports = DiscordBot;
+module.exports = CoolPal;

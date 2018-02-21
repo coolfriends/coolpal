@@ -1,6 +1,5 @@
-# Discordbot
-[![Build Status](https://travis-ci.org/coolfriends/discordbot.svg?branch=master)](https://travis-ci.org/coolfriends/discordbot)
-Discord bot equipped with a simple plugin architecture.
+# CoolPal - A cool pal ready to hang out in your Discord server
+[![Build Status](https://travis-ci.org/coolfriends/coolpal.svg?branch=master)](https://travis-ci.org/coolfriends/coolpal)
 
 ## Download repo and install dependencies
 
@@ -14,8 +13,8 @@ https://github.com/creationix/nvm
 
 ### Download project & change directories
 ```bash
-git clone https://github.com/coolfriends/discordbot.git
-cd discordbot
+git clone https://github.com/coolfriends/coolpal.git
+cd coolpal
 ```
 
 ### Download dependencies
@@ -23,7 +22,7 @@ cd discordbot
 npm install
 ```
 
-### Run discordbot on local machine
+### Run coolpal on local machine
 Run bundle steps
 ```bash
 npm run bundle
@@ -34,22 +33,22 @@ Run bot
 npm start
 ```
 
-### Build docker image and run discordbot in container
+### Build docker image and run coolpal in container
 Make sure you have docker installed: https://docs.docker.com/engine/installation/
 
 Build image from Dockerfile
 ```bash
-docker build --no-cache -t discordbot .
+docker build --no-cache -t coolpal .
 ```
 
 Run container in detached mode
 ```bash
-docker run -d discordbot
+docker run -d coolpal
 ```
 
 Run container and enter shell
 ```bash
-docker run -it discordbot
+docker run -it coolpal
 ```
 
 ## Development
@@ -63,7 +62,7 @@ class HelloWorldPlugin {
 module.exports = HelloWorldPlugin;
 ```
 
-Add a constructor that specifies the types of Discord events this plugin will handle.
+Add a constructor that specifies the types of discord events this plugin will handle.
 ```js
 class HelloWorldPlugin {
   constructor() {
@@ -90,7 +89,7 @@ class HelloWorldPlugin {
 ```
 
 Finally, implement the handle_message function that takes the event and a
-configuration file (passed in from `DiscordBot.receive_event`).
+configuration file (passed in from `CoolPal.receive_event`).
 ```js
 class HelloWorldPlugin {
   ...
@@ -113,14 +112,14 @@ class HelloWorldPlugin {
 ### Use the `HelloWorldPlugin`
 ```js
 const HelloWorldPlugin = require('../src/plugins/hello_world.js');
-const DiscordBot = require('../src/discordbot.js');
+const CoolPal = require('../src/coolpal.js');
 
 let plugins = [
   new HelloWorldPlugin
 ];
 
 let token = process.env.DISCORD_TOKEN;
-let bot = new DiscordBot(token, plugins);
+let bot = new CoolPal(token, plugins);
 bot.start();
 ```
 
@@ -129,9 +128,9 @@ bot.start();
 ### Use a different prefix
 ```js
 const YourPlugin = require('../plugins/your_plugin.js');
-const DiscordBot = require('../src/discordbot.js');
+const CoolPal = require('../src/coolpal.js');
 let token = 'your-token';
-let bot = new DiscordBot(token, plugins, {
+let bot = new CoolPal(token, plugins, {
   prefix: '$'
 })
 bot.start();
@@ -143,22 +142,3 @@ Then run the tests like so:
 ```bash
 npm test
 ```
-
-## TODO
-* Create tests
-* Change DynamoDB script to use version of dynamo (change host)
-* Improve weather plugin to work for any area
-* Use env variables where appropriate
-* Google maps plugin to report traffic between common destinations
-* Persistent TODO plugin for all users
-* Reminder plugin
-* Add waiter to DB creation script
-* Spruce up weather report with em0jis
-* Abstract displaying in a tabular format for easier use (make display_polls generic somehow)
-  from `examples/run_print_poll_list.js`
-* Change plugin interface where DiscordBot splits the incoming message into a command and args,
-  and passes to plugins accordingly (by command name)
-* Add prefix support
-* Write test that ensures when discordbot instance is created with correct configuration, the _event_types variable receives events
-  
-
