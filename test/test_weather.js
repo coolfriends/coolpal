@@ -63,32 +63,6 @@ describe('WeatherPlugin', function() {
         assert(plugin.units, 'Metric');
       });
     });
-    describe('city_ids', function() {
-      it('should have an id for denton', function() {
-        assert(plugin.city_ids.denton);
-      });
-      it('should have an id for seattle', function() {
-        assert(plugin.city_ids.seattle);
-      });
-    });
-  });
-  describe('#weather_url()', function() {
-    it('should return a well formatted url if the city exists', function() {
-      let plugin = new WeatherPlugin({
-        openweather_api_key: 'not-a-real-api-key'
-      });
-      let example_city_id = '31432141324';
-      plugin.city_ids = {
-        example_city: example_city_id
-      };
-
-      let expected = 'http://api.openweathermap.org' +
-                     '/data/2.5/weather?id=' +
-                     example_city_id +
-                     '&units=imperial&APPID=' +
-                     'not-a-real-api-key';
-      assert.equal(expected, plugin.weather_url('example_city'));
-    });
   });
   describe('#handle_event()', function() {
     it('should return true if message if well formatted', function() {
@@ -134,38 +108,6 @@ describe('WeatherPlugin', function() {
       };
       assert.equal(recorded_message, '');
     });
-    it('should return true if a city is not provided', function() {
-      let message_fixture = {
-        content: '!weather',
-        author: {
-          username: 'notabot'
-        },
-        reply: () => {}
-      };
-      assert(plugin.handle_message(message_fixture, config_fixture));
-    });
-    it('should reply with informative message if no city is provided', function() {
-      let plugin = new WeatherPlugin;
-      plugin.city_ids = {
-        example_city: 'some_fake_id'
-      };
-
-      let recorded_message = '';
-      let message_fixture = {
-        content: '!weather',
-        author: {
-          username: 'notabot'
-        },
-        reply: (message) => {
-          recorded_message = message;
-        }
-      };
-      let expected = 'No city provided. Try one of the following:\n' +
-                     '!weather example_city\n';
-
-      plugin.handle_message(message_fixture, config_fixture);
-      assert.equal(recorded_message, expected);
-    });
     it('should return true if city is not supported', function() {
       let message_fixture = {
         content: '!weather not_a_supported_city',
@@ -176,28 +118,6 @@ describe('WeatherPlugin', function() {
       };
 
       assert(plugin.handle_message(message_fixture, config_fixture));
-    });
-    it('should reply with an informative message when unsupported city provided', function() {
-      let plugin = new WeatherPlugin;
-      plugin.city_ids = {
-        example_city: 'some_fake_id'
-      };
-
-      let recorded_message = '';
-      let message_fixture = {
-        content: '!weather this_city_is_not_supported',
-        author: {
-          username: 'notabot'
-        },
-        reply: (message) => {
-          recorded_message = message;
-        }
-      };
-      let expected = 'City: This_city_is_not_supported is not supported at this time. Try:\n' +
-                     '!weather example_city\n';
-
-      plugin.handle_message(message_fixture, config_fixture);
-      assert.equal(recorded_message, expected);
     });
     it('should return true if message is correct', function() {
       let message_fixture = {
@@ -218,24 +138,19 @@ describe('WeatherPlugin', function() {
           main: {
             temp: '70'
           },
-          weather: [
-            {
-              description: 'sunny'
-            }
-          ],
+          weather: [{
+            description: 'sunny'
+          }],
           wind: {
             speed: '10'
           }
         }
       };
-
       let axios_mock = build_axios_mock(response);
       let plugin = new WeatherPlugin({
         openweather_api_key: 'not-a-real-api-key',
         axios: axios_mock
       });
-
-
       // Make sure that the string passed to message.reply is captured.
       let recorded_message = '';
       let message_fixture = {
@@ -247,13 +162,12 @@ describe('WeatherPlugin', function() {
           recorded_message = message;
         }
       };
-
       let expected = "\nTemp: " +
-                     response.data.main.temp +
-                     " **|** Weather: " +
-                     response.data.weather[0].description +
-                     " **|** Wind: " +
-                     response.data.wind.speed;
+        response.data.main.temp +
+        " **|** Weather: " +
+        response.data.weather[0].description +
+        " **|** Wind: " +
+        response.data.wind.speed;
 
       plugin.handle_message(message_fixture, config_fixture);
 
