@@ -1,11 +1,22 @@
 const Discord = require('discord.js');
 const plugin_name_to_class = require('./plugins/index.js').name_to_class;
 
-// TODO:
-// Create parent plugin class
-// Add more locations for weather
-// Add more functionality for todo list
-class DiscordBot {
+/**
+ * CoolPal is a bot for Discord with plugins.
+ */
+class CoolPal {
+  /**
+   * Create your pal.
+   *
+   * @todo Throw an error if no token is provided.
+   *
+   * @param {Object} config - The high level configuration object for CoolPal.
+   * @param {string} config.token - A token for the Discord API.
+   * @param {Object[]} config.plugins - Plugins to enable.
+   * @param {string} plugins[].name - The name of a plugin.
+   * @param {Object} plugins[].configuration - Configuration specific to the plugin.
+   *
+   */
   constructor(config={}) {
     this.config = config;
     this.client = new Discord.Client();
@@ -16,16 +27,44 @@ class DiscordBot {
     this._configure_plugins(this.config.plugins);
   }
 
+  /**
+   * Return a list of plugins
+   *
+   * @return {Object[]} A list of plugin instances
+   *
+   * @example
+   * var pal = CoolPal({});
+   * var plugins = pal.plugins();
+   */
   get plugins() {
     return this._plugins;
   }
 
+  /**
+   * Starts the event loop.
+   *
+   * @example
+   * var pal = CoolPal({
+   *   token: process.env.DISCORD_TOKEN;
+   * });
+   * pal.start();
+   */
   start() {
     this._login();
     this._ready();
     this._receive_events();
   }
 
+  /**
+   * Creates an instance of a plugin using a plugin config
+   *
+   * @param {Object} plugin_config - The high level configuration object for a plugin
+   * @param {string} plugin_config.name - The name of the plugin
+   * @param {Object} plugin_config.configuration - An object that changes plugin functionality
+   *
+   * @returns An instance of the class corresponding to plugin_config.name
+   * @private
+   */
   _configure_plugin(plugin_config) {
     let plugin_class = plugin_name_to_class[plugin_config.name];
     return new plugin_class(plugin_config.configuration);
@@ -90,4 +129,4 @@ class DiscordBot {
   }
 };
 
-module.exports = DiscordBot;
+module.exports = CoolPal;

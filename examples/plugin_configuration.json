@@ -14,6 +14,14 @@
       "configuration": {
         "openweather_api_key": "d7f4aebada4db519da8a383c9c79b961"
       }
+    },
+    {
+      "name": "bitcoin",
+      "configuration": {}
+    },
+    {
+      "name": "ethereum",
+      "configuration": {}
     }
   ]
 }
