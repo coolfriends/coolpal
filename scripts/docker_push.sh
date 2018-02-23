@@ -4,7 +4,7 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 
         # Provides docker with a 12 hour auth token
         export PATH=$PATH:$HOME/.local/bin
-        eval $(aws ecr get-login --region $AWS_DEFAULT_REGION)
+        eval $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
 
         echo "Building $IMAGE_NAME"
         docker build -t $IMAGE_NAME .
