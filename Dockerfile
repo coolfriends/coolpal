@@ -8,6 +8,6 @@ RUN apt-get install -y \
     nodejs \
     build-essential
 RUN git clone https://github.com/coolfriends/coolpal.git
-RUN cd /coolpal && npm install && npm install -g rollup gulp
-RUN cd /coolpal && rollup --config rollup.config.dev.js && rollup --config rollup.config.prod.js && gulp
-CMD cd /coolpal && npm start
+RUN cd coolpal && npm install && npm install -g rollup gulp
+RUN cd coolpal && rollup --config rollup.config.dev.js && rollup --config rollup.config.prod.js && gulp
+CMD cd coolpal && npm start
