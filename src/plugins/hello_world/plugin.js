@@ -1,18 +1,10 @@
-class HelloWorldPlugin {
+const Plugin = require('../plugin.js');
+
+class HelloWorldPlugin extends Plugin {
   constructor() {
+    super();
     this.command = 'helloworld';
     this.supported_event_types = ['message'];
-  }
-
-  handle_event(event_type, event, config) {
-    if (event_type == 'message') {
-      return this.handle_message(event, config);
-    }
-    return false;
-  }
-
-  prefixed_command(config) {
-    return config.prefix + this.command;
   }
 
   handle_message(message, config) {
