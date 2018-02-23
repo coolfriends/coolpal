@@ -3,7 +3,6 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     if [ "$TRAVIS_BRANCH" == "master" ]; then
 
         # Provides docker with a 12 hour auth token
-        npm install -g aws-cli
         export PATH=$PATH:$HOME/.local/bin
         eval $(aws ecr get-login --region $AWS_DEFAULT_REGION)
 
