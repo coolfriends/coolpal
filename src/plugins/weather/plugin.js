@@ -1,8 +1,11 @@
 const axios = require('axios');
 const utils = require('../utils.js');
+const Plugin = require('../plugin.js');
 
-class WeatherPlugin {
+class WeatherPlugin extends Plugin {
   constructor(config = {}) {
+    super();
+
     /**
      * The name for this command
      */
@@ -51,13 +54,6 @@ class WeatherPlugin {
 
   weather_url(city) {
     return this.base_url + '/data/2.5/weather?q=' + city + '&units=' + this.units + '&APPID=' + this.openweather_api_key;
-  }
-
-  handle_event(event_type, event, config) {
-    if (event_type == 'message') {
-      return this.handle_message(event, config);
-    }
-    return false;
   }
 
   handle_message(message, config) {

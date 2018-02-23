@@ -1,13 +1,15 @@
 // TODO: Refactor this thing to work! Right now as a plugin it will certainly
 // not work
 const AWS = require('aws-sdk');
+const Plugin = require('../plugin.js');
 
 const default_config = {
   aws_region: 'us-west-2'
 };
 
-class TodoPlugin {
+class TodoPlugin extends Plugin {
   constructor(config=default_config) {
+    super();
     this.command = 'todo';
     this.supported_event_types = ['message'];
     this.db = new AWS.DynamoDB({region: config.aws_region});

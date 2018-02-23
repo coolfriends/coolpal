@@ -1,5 +1,7 @@
+const Plugin = require('../plugin.js');
+
 // TODO: Finish implementing Poll plugin
-class PollPlugin {
+class PollPlugin extends Plugin {
   /*
    TODO: Move this documentation to where it's supposed to go.
 
@@ -23,6 +25,7 @@ class PollPlugin {
    }
    */
   constructor() {
+    super();
     this.command = 'poll';
     this.supported_event_types = ['message'];
     this.polls = [];

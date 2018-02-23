@@ -1,25 +1,30 @@
 const axios = require('axios');
 const utils = require('../utils.js');
+const Plugin = require('../plugin.js');
 
-class BitcoinPlugin {
+class BitcoinPlugin extends Plugin {
   constructor(config = {}) {
+    super();
     this.command = 'bitcoin';
     this.supported_event_types = ['message'];
     this.url = config.url || 'https://api.coinbase.com/v2/prices/BTC-USD/buy';
     this.axios = config.axios || axios.create();
   }
 
-  handle_event(event_type, event, config) {
-    if (event_type == 'message') return this.handle_message(event, config);
-    return false;
-  }
-
   handle_message(message, config) {
     let command_args = utils.split_message(message);
-    if (command_args[0] != config.prefix + 'bitcoin') return false;
-    if (message.author.username == config.client.user.username) return true;
+
+    if (command_args[0] != config.prefix + 'bitcoin') {
+      return false;
+    }
+
+    if (message.author.username == config.client.user.username) {
+      return true;
+    }
+
     let url = this.url;
     this.call_bitcoin_api(message, url, config);
+
     return true;
   }
 

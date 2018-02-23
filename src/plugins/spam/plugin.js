@@ -1,16 +1,11 @@
 const utils = require('../utils.js');
+const Plugin = require('../plugin.js');
 
-class SpamPlugin {
+class SpamPlugin extends Plugin {
   constructor() {
+    super();
     this.command = 'spam';
     this.supported_event_types = ['message'];
-  }
-
-  handle_event(event_type, event, config) {
-    if (event_type == 'message') {
-      return this.handle_message(event, config);
-    }
-    return false;
   }
 
   handle_message(message, config) {

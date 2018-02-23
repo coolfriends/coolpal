@@ -1,25 +1,20 @@
 const querystring = require('querystring');
 const axios = require('axios');
 const utils = require('../utils.js');
+const Plugin = require('../plugin.js');
 
-class WCPlugin {
+class WCPlugin extends Plugin {
   constructor(config={}) {
+    super();
     this.command = 'wc';
     this.supported_event_types = ['message'];
     this.base_url = config.base_url || process.env.WC_URL;
     this.wc_secret_key = config.wc_secret_key || process.env.WC_SECRET_KEY;
   }
 
-  handle_event(event_type, event, config) {
-    if (event_type == 'message') {
-      return this.handle_message(event, config);
-    }
-    return false;
-  }
-
   handle_message(message, config) {
     let command_args = utils.split_message(message);
-    if (command_args[0] != config.prefix + 'wc') {
+    if (command_args[0] != this.prefixed_command(config)) {
       return false;
     }
 
