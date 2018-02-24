@@ -5,6 +5,7 @@ A cool pal ready to hang out in your Discord server
 [![Build Status](https://travis-ci.org/coolfriends/coolpal.svg?branch=master)](https://travis-ci.org/coolfriends/coolpal)
 [![Coverage Status](https://coveralls.io/repos/github/coolfriends/coolpal/badge.svg?branch=master)](https://coveralls.io/github/coolfriends/coolpal?branch=master)
  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Inline docs](http://inch-ci.org/github/coolfriends/coolpal.svg?branch=master)](http://inch-ci.org/github/coolfriends/coolpal)
 ## Download repo and install dependencies
 
 ### Requirements
