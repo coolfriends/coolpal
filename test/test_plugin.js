@@ -45,8 +45,8 @@ describe('Plugin', function() {
 
   describe('#handle_message()', function() {
 
-    it('should throw error indicating plugins undefined', function() {
-      assert.throws(plugin.handle_message, Error, "Error thrown");
+    it('should return false', function() {
+      assert(!plugin.handle_message({}, {}));
     });
 
   });

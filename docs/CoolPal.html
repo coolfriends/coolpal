@@ -170,21 +170,33 @@
 
             
 
-            <td class="description last">Plugins to enable.</td>
-        </tr>
+            <td class="description last">Plugins to enable.
+                <h6>Properties</h6>
+                
 
-    
-    </tbody>
-</table>
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-            </td>
-        </tr>
+        <th>Type</th>
 
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>plugins[].name</code></td>
+                <td class="name"><code>name</code></td>
             
 
             <td class="type">
@@ -207,7 +219,7 @@
 
         <tr>
             
-                <td class="name"><code>plugins[].configuration</code></td>
+                <td class="name"><code>configuration</code></td>
             
 
             <td class="type">
@@ -224,6 +236,20 @@
             
 
             <td class="description last">Configuration specific to the plugin.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -264,7 +290,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="coolpal.js.html">coolpal.js</a>, <a href="coolpal.js.html#line7">line 7</a>
+        <a href="coolpal.js.html">coolpal.js</a>, <a href="coolpal.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -291,6 +317,22 @@
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Copy the plugin configuration file from examples and fill in API keys
+// and the Discord API token
+fs.readFile('path/to/your/configuration/file.json', (err, data) => {
+  if (err) {
+    throw err;
+  }
+
+  let configuration = JSON.parse(data);
+
+  let pal = new CoolPal(configuration);
+  pal.start();
+});</code></pre>
+
+
 
     
     </div>
@@ -309,6 +351,222 @@
 
     
         <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="client"><span class="type-signature"></span>client<span class="type-signature"> :Object</span></h4>
+
+
+
+
+<div class="description">
+    A Discord API client.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="coolpal.js.html">coolpal.js</a>, <a href="coolpal.js.html#line41">line 41</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="config"><span class="type-signature"></span>config<span class="type-signature"> :Object</span></h4>
+
+
+
+
+<div class="description">
+    The high level configuration object for CoolPal.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="coolpal.js.html">coolpal.js</a>, <a href="coolpal.js.html#line36">line 36</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="discord_token"><span class="type-signature"></span>discord_token<span class="type-signature"> :Object</span></h4>
+
+
+
+
+<div class="description">
+    A Discord bot API token.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="coolpal.js.html">coolpal.js</a>, <a href="coolpal.js.html#line46">line 46</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
 
         
             
@@ -356,7 +614,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="coolpal.js.html">coolpal.js</a>, <a href="coolpal.js.html#line39">line 39</a>
+        <a href="coolpal.js.html">coolpal.js</a>, <a href="coolpal.js.html#line84">line 84</a>
     </li></ul></dd>
     
 
@@ -373,8 +631,82 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>var pal = CoolPal({});
-var plugins = pal.plugins();</code></pre>
+    <pre class="prettyprint"><code>// Iterate over the plugins
+for (let plugin of pal.plugins) {
+  console.log(plugin.command)
+}</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="prefix"><span class="type-signature"></span>prefix<span class="type-signature"> :Array.&lt;Object></span></h4>
+
+
+
+
+<div class="description">
+    The prefix for all plugin commands.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;Object></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="coolpal.js.html">coolpal.js</a>, <a href="coolpal.js.html#line51">line 51</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
 
 
 
@@ -442,7 +774,7 @@ var plugins = pal.plugins();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="coolpal.js.html">coolpal.js</a>, <a href="coolpal.js.html#line52">line 52</a>
+        <a href="coolpal.js.html">coolpal.js</a>, <a href="coolpal.js.html#line98">line 98</a>
     </li></ul></dd>
     
 
@@ -471,8 +803,9 @@ var plugins = pal.plugins();</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>var pal = CoolPal({
-  token: process.env.DISCORD_TOKEN;
+    <pre class="prettyprint"><code>let pal = CoolPal({
+  token: process.env.DISCORD_TOKEN,
+  plugins: []
 });
 pal.start();</code></pre>
 
@@ -494,13 +827,13 @@ pal.start();</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CoolPal.html">CoolPal</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CoolPal.html">CoolPal</a></li><li><a href="Plugin.html">Plugin</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Feb 21 2018 03:40:40 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Feb 24 2018 13:53:23 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

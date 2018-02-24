@@ -3,38 +3,83 @@ const plugin_name_to_class = require('./plugins/index.js').name_to_class;
 
 /**
  * CoolPal is a bot for Discord with plugins.
+ *
+ * @example
+ * // Copy the plugin configuration file from examples and fill in API keys
+ * // and the Discord API token
+ * fs.readFile('path/to/your/configuration/file.json', (err, data) => {
+ *   if (err) {
+ *     throw err;
+ *   }
+ *
+ *   let configuration = JSON.parse(data);
+ *
+ *   let pal = new CoolPal(configuration);
+ *   pal.start();
+ * });
  */
 class CoolPal {
   /**
    * Create your pal.
    *
-   * @todo Throw an error if no token is provided.
+   * @constructs CoolPal
    *
    * @param {Object} config - The high level configuration object for CoolPal.
    * @param {string} config.token - A token for the Discord API.
    * @param {Object[]} config.plugins - Plugins to enable.
-   * @param {string} plugins[].name - The name of a plugin.
-   * @param {Object} plugins[].configuration - Configuration specific to the plugin.
+   * @param {string} config.plugins[].name - The name of a plugin.
+   * @param {Object} config.plugins[].configuration - Configuration specific to the plugin.
    *
+   * @todo Throw an error if no token is provided.
    */
-  constructor(config={}) {
+  constructor(config) {
+    /**
+     * @member {Object} CoolPal#config - The high level configuration object for CoolPal.
+     */
     this.config = config;
+
+    /**
+     * @member {Object} CoolPal#client - A Discord API client.
+     */
     this.client = new Discord.Client();
+
+    /**
+     * @member {Object} CoolPal#discord_token - A Discord bot API token.
+     */
     this.discord_token = this.config.token;
-    this._event_types = [];
-    this._plugins = [];
+
+    /**
+     * @member {Object[]} CoolPal#prefix - The prefix for all plugin commands.
+     */
     this.prefix = this.config.prefix || '!';
+
+    /**
+     * @member {Object[]} CoolPal#_event_types - A list of unique event types.
+     * @private
+     */
+    this._event_types = [];
+
+    /**
+     * @member {Object[]} CoolPal#_plugins - A list of configured plugin instances.
+     * @private
+     */
+    this._plugins = [];
+
+    // End of member variables
     this._configure_plugins(this.config.plugins);
   }
 
   /**
    * Return a list of plugins
    *
-   * @return {Object[]} A list of plugin instances
+   * @return {Object[]} A list of plugin for this instance.
    *
    * @example
-   * var pal = CoolPal({});
-   * var plugins = pal.plugins();
+   * // Iterate over the plugins
+   * for (let plugin of pal.plugins) {
+   *   console.log(plugin.command)
+   * }
+   *
    */
   get plugins() {
     return this._plugins;
@@ -44,8 +89,9 @@ class CoolPal {
    * Starts the event loop.
    *
    * @example
-   * var pal = CoolPal({
-   *   token: process.env.DISCORD_TOKEN;
+   * let pal = CoolPal({
+   *   token: process.env.DISCORD_TOKEN,
+   *   plugins: []
    * });
    * pal.start();
    */
@@ -58,7 +104,7 @@ class CoolPal {
   /**
    * Creates an instance of a plugin using a plugin config
    *
-   * @param {Object} plugin_config - The high level configuration object for a plugin
+   * @param {Object} plugin_config - The configuration object for a plugin
    * @param {string} plugin_config.name - The name of the plugin
    * @param {Object} plugin_config.configuration - An object that changes plugin functionality
    *
@@ -70,13 +116,26 @@ class CoolPal {
     return new plugin_class(plugin_config.configuration);
   }
 
+  /**
+   * Instantiates multiple plugins based on a configuration file.
+   *
+   * @param {Object[]} plugins_config - Highest level configuration object for multiple plugins.
+   *
+   * @private
+   */
   _configure_plugins(plugins_config) {
-    for (let plugin of plugins_config) {
-      this.register_plugin(this._configure_plugin(plugin));
+    for (let plugin_config of plugins_config) {
+      this._register_plugin(this._configure_plugin(plugin_config));
     }
   }
 
-  register_plugin(plugin) {
+  /**
+   * Adds a plugin to the instance and configured event types to handle new events.
+   *
+   * @param {Object} plugin - A single configured plugin that extends Plugin.
+   * @private
+   */
+  _register_plugin(plugin) {
     this._plugins.push(plugin);
 
     for (let event_type of plugin.supported_event_types) {
@@ -86,30 +145,35 @@ class CoolPal {
     }
   }
 
+  /**
+   * Logs in to the Discord API.
+   *
+   * @private
+   */
   _login() {
     this.client.login(this.discord_token);
   }
 
-  // TODO: Allow user to set their ready message.
+  /**
+   * Logs in to the Discord API.
+   *
+   * @private
+   *
+   * @todo Allow user to set their ready message
+   */
   _ready() {
     this.client.on('ready', () => {
       console.log('Just saying im ready');
     });
   }
 
-  _generate_event_types() {
-    let unique_event_types = [];
-    for (let plugin of this._plugins) {
-      for (let event_type of plugin.supported_event_types) {
-        if (!unique_event_types.includes(event_type)) {
-          unique_event_types.push(event_type);
-        }
-      }
-    }
-    this._event_types = unique_event_types;
-  }
-
-  // Minimum config to get plugins to work is client and prefix
+  /**
+   * Register an event type to be received by all plugins.
+   *
+   * @private
+   *
+   * @todo Allow user to set their ready message
+   */
   _receive_event(event_type) {
     this.client.on(event_type, event => {
       for (let plugin of this._plugins) {
@@ -121,9 +185,13 @@ class CoolPal {
     });
   }
 
+  /**
+   * Registers all event types to be receives by all plugins.
+   *
+   * @private
+   */
   _receive_events() {
     for (let event_type of this._event_types) {
-      console.log(event_type);
       this._receive_event(event_type);
     }
   }

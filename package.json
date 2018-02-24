@@ -9,7 +9,7 @@
     "coveralls": "npm run coverage -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "test": "mocha",
     "start": "node bin/prod_bundle.min.js",
-    "docs": "jsdoc -d ./docs src/coolpal.js README.md"
+    "docs": "jsdoc -d ./docs src/** README.md"
   },
   "author": "coolfriends",
   "license": "MIT",
