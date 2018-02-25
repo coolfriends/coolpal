@@ -122,5 +122,4 @@ class WeatherPlugin extends Plugin {
   }
 };
 
-
 module.exports = WeatherPlugin;
