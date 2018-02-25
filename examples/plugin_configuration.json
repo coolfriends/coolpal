@@ -26,6 +26,10 @@
     {
       "name": "feature-request",
       "configuration": {}
+    },
+    {
+      "name": "google-news",
+      "configuration": {}
     }
   ]
 }
