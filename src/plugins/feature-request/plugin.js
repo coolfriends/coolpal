@@ -7,6 +7,7 @@ const Plugin = require('../plugin.js');
 class FeatureRequestPlugin extends Plugin {
   /**
    * @constructs FeatureRequestPlugin
+   * @todo Add an e-mail list for the feature requests
    */
   constructor() {
     super();
