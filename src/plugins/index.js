@@ -4,7 +4,8 @@ let name_to_class = {
   'weather': require('./weather/plugin.js'),
   'bitcoin': require('./btcprice/plugin.js'),
   'ethereum': require('./ethprice/plugin.js'),
-  'feature-request': require('./ethprice/plugin.js')
+  'feature-request': require('./feature-request/plugin.js'),
+  'google-news': require('./google-news/plugin.js')
 };
 
 module.exports = {

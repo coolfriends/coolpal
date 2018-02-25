@@ -1,6 +1,7 @@
 {
   "token": "",
-  "plugins": [{
+  "plugins": [
+    {
       "name": "helloworld",
       "configuration": {}
     },
@@ -24,6 +25,10 @@
     },
     {
       "name": "feature-request",
+      "configuration": {}
+    },
+    {
+      "name": "google-news",
       "configuration": {}
     }
   ]
