@@ -1,5 +1,7 @@
 export default {
-  entry: 'examples/run_coolpal.js',
-  format: 'cjs',
-  dest: 'bin/prod_bundle.js'
+  input: 'examples/run_coolpal.js',
+  output: {
+    format: 'cjs',
+    file: 'bin/prod_bundle.js'
+  }
 };

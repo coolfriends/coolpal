@@ -1,8 +1,11 @@
 const axios = require('axios');
 const utils = require('../utils.js');
+const Plugin = require('../plugin.js');
 
-class WeatherPlugin {
+class WeatherPlugin extends Plugin {
   constructor(config = {}) {
+    super();
+
     /**
      * The name for this command
      */
@@ -51,6 +54,42 @@ class WeatherPlugin {
 
   weather_url(city) {
     return this.base_url + '/data/2.5/weather?q=' + city + '&units=' + this.units + '&APPID=' + this.openweather_api_key;
+  }
+
+  handle_message(message, config) {
+    let command_args = utils.split_message(message);
+    if (command_args[0] != config.prefix + 'weather') {
+      return false;
+    }
+
+    // End run if the bot is the creator of the message
+    if (message.author.username == config.client.user.username) {
+      return true;
+    }
+
+    let city = command_args[1];
+    if (!city) {
+      let choice_string = this.city_choice_string(config);
+      message.reply(
+        'No city provided. Try one of the following:\n' +
+        choice_string
+      );
+      return true;
+    }
+
+    let url = this.weather_url(city);
+    if (!url) {
+      let choice_string = this.city_choice_string(config);
+      message.reply(
+        'City: ' + utils.capitalize(city) +
+        ' is not supported at this time. Try:\n' +
+        choice_string
+      );
+      return true;
+    }
+
+    this.call_weather_api(message, url, config);
+    return true;
   }
 
   call_weather_api(message, url, config = {}) {

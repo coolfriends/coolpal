@@ -22,6 +22,10 @@
     {
       "name": "ethereum",
       "configuration": {}
+    },
+    {
+      "name": "feature-request",
+      "configuration": {}
     }
   ]
 }
