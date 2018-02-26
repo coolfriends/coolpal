@@ -2,16 +2,16 @@ const assert = require('assert');
 const HelloWorldPlugin = require('../src/plugins/hello_world/plugin.js');
 
 describe('HelloWorldPlugin', function() {
-  let plugin = new HelloWorldPlugin();
   let bot_user_name = 'abot';
-  let config_fixture = {
+  let pal = {
     prefix: '!',
     client: {
       user: {
         username: bot_user_name
       }
     }
-  };
+  }
+  let plugin = new HelloWorldPlugin(pal);
 
   describe('#constructor()', function() {
     describe('support_event_types', function() {
@@ -30,7 +30,7 @@ describe('HelloWorldPlugin', function() {
         content: '!helloworld',
         reply: () => {}
       };
-      assert(plugin.handle_event('message', message_fixture, config_fixture));
+      assert(plugin.handle_event('message', message_fixture));
     });
     it('should return false if event_type is not message', function() {
       assert(!plugin.handle_event('not_a_supported_message', {}, {}));
@@ -46,7 +46,7 @@ describe('HelloWorldPlugin', function() {
         content: '!helloworld,',
         reply: () => {}
       };
-      assert(plugin.handle_message(message_fixture, config_fixture));
+      assert(plugin.handle_message(message_fixture));
     });
     it('should send a greeting to the user', function() {
       let recorded_message = '';
@@ -59,14 +59,14 @@ describe('HelloWorldPlugin', function() {
           recorded_message = message;
         }
       };
-      plugin.handle_message(message_fixture, config_fixture);
+      plugin.handle_message(message_fixture);
       assert.equal(recorded_message, 'Hello, world!');
     });
     it('should return false if the message command is not called', function() {
       let message_fixture = {
         content: 'notthecommand'
       };
-      assert(!plugin.handle_message(message_fixture, config_fixture));
+      assert(!plugin.handle_message(message_fixture));
     });
     it('should return true if the message is from the bot', function() {
       let message_fixture = {
@@ -75,7 +75,7 @@ describe('HelloWorldPlugin', function() {
           username: bot_user_name
         }
       };
-      assert(plugin.handle_message(message_fixture, config_fixture));
+      assert(plugin.handle_message(message_fixture));
     });
     it('should not reply to the message if the message is from the bot', function() {
       let recorded_message = '';
@@ -88,7 +88,7 @@ describe('HelloWorldPlugin', function() {
           recorded_message = message;
         }
       };
-      plugin.handle_message(message_fixture, config_fixture);
+      plugin.handle_message(message_fixture);
       assert.equal('', recorded_message);
     });
   });

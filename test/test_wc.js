@@ -6,12 +6,9 @@ describe('WCPlugin', function() {
   // doesnt work (bad env setup, etc) but don't send that to discord!
   let base_url = 'http://this_is_the_example.com/';
   let secret_key = 'this-is-a-very-secret-key';
-  let plugin = new WCPlugin({
-    base_url: base_url,
-    wc_secret_key: secret_key
-  });
+
   let bot_user_name = 'abot';
-  let config_fixture = {
+  let pal = {
     prefix: '!',
     client: {
       user: {
@@ -19,6 +16,10 @@ describe('WCPlugin', function() {
       }
     }
   };
+  let plugin = new WCPlugin(pal, {
+    base_url: base_url,
+    wc_secret_key: secret_key
+  });
 
   describe('#constructor()', function() {
     describe('support_event_types', function() {
@@ -30,7 +31,7 @@ describe('WCPlugin', function() {
       it('should use a base url provided config first', function() {
         // Temporarily set WC_URL
         process.env.WC_URL = 'this-is-a-test-url';
-        let plugin = new WCPlugin({
+        let plugin = new WCPlugin(pal, {
           base_url: 'my-fancy-url.com/'
         });
         assert.equal(plugin.base_url, 'my-fancy-url.com/');
@@ -44,14 +45,14 @@ describe('WCPlugin', function() {
         it('should use a secret keyg provided config first', function() {
           // Temporarily set WC_URL
           process.env.WC_SECRET_KEY = 'this-is-a-secret-key';
-          let plugin = new WCPlugin({
+          let plugin = new WCPlugin(pal, {
             wc_secret_key: 'this-is-a-very-secret-key'
           });
           assert.equal(plugin.wc_secret_key, 'this-is-a-very-secret-key');
         });
         it ('should use a base url from the environment if one is not in config', function() {
           process.env.WC_URL = 'this-is-a-very-secret-key';
-          let plugin = new WCPlugin;
+          let plugin = new WCPlugin(pal);
           assert.equal(plugin.base_url, 'this-is-a-very-secret-key');
         });
       });
@@ -65,10 +66,10 @@ describe('WCPlugin', function() {
           username: 'not-from-a-bot'
         }
       };
-      assert(plugin.handle_event('message', message_fixture, config_fixture));
+      assert(plugin.handle_event('message', message_fixture));
     });
     it('should return false if the event type is not message', function() {
-      assert(!plugin.handle_event('unsupported_event_type', {}, config_fixture));
+      assert(!plugin.handle_event('unsupported_event_type', {}));
     });
   });
   describe('#handle_message()', function() {
@@ -79,13 +80,13 @@ describe('WCPlugin', function() {
           username: 'abot'
         }
       };
-      assert(plugin.handle_event('message', message_fixture, config_fixture));
+      assert(plugin.handle_event('message', message_fixture));
     });
     it('should return false the message is not intended for wc', function() {
       let message_fixture = {
         content: '!notwc'
       };
-      assert(!plugin.handle_event('message', message_fixture, config_fixture));
+      assert(!plugin.handle_event('message', message_fixture));
     });
     it('should true if the message for wc and not from bot', function() {
       let message_fixture = {
@@ -94,7 +95,7 @@ describe('WCPlugin', function() {
           username: 'notabotuser'
         }
       };
-      assert(plugin.handle_event('message', message_fixture, config_fixture));
+      assert(plugin.handle_event('message', message_fixture));
     });
     it('should not reply to the message if the message is from bot', function() {
       let recorded_message = '';
@@ -107,7 +108,7 @@ describe('WCPlugin', function() {
           recorded_message = message;
         }
       };
-      plugin.handle_event('message', message_fixture, config_fixture);
+      plugin.handle_event('message', message_fixture);
       assert.equal(recorded_message, '');
     });
     // TODO: Finish implementing tests. Need to figure out how to mock axios

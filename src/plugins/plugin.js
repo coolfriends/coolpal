@@ -4,9 +4,15 @@
 class Plugin {
   /**
    * @constructs Plugin
+   * @param {Object} pal - A {@link CoolPal} instance.
    * @param {Object} [config={}] - The optional configuration for a plugin.
    */
-  constructor(config={}) {
+  constructor(pal, config={}) {
+    /**
+     * @member {Object} pal - A reference to the calling {@link CoolPal} instance.
+     */
+    this.pal = pal;
+
     /**
      * @member {string} Plugin#command - The base command a user types to access
      * this plugin.
@@ -34,9 +40,9 @@ class Plugin {
    * @todo Deprecate passing in a config for a member variable called 'pal' that
    * offers the same functionality
    */
-  handle_event(event_type, event, config) {
+  handle_event(event_type, event) {
     if (event_type == 'message') {
-      return this.handle_message(event, config);
+      return this.handle_message(event);
     }
     return false;
   }
@@ -44,8 +50,8 @@ class Plugin {
   /**
    *
    */
-  prefixed_command(config) {
-    return config.prefix + this.command;
+  prefixed_command() {
+    return this.pal.prefix + this.command;
   }
 
   /**
@@ -63,7 +69,7 @@ class Plugin {
    * @todo Deprecate passing in a config for a member variable called 'pal' that
    * offers the same functionality
    */
-  handle_message(message, config) {
+  handle_message(message) {
     return false;
   }
 }

@@ -7,19 +7,17 @@ describe('WeatherPlugin', function() {
   // Override opeanweather api key
   process.env.OPENWEATHER_API_KEY = 'also-not-a-real-api-key';
 
-  let plugin = new WeatherPlugin({
-    openweather_api_key: 'not-a-real-api-key'
-  });
-
-  let config_fixture = {
+  let pal = {
     prefix: '!',
     client: {
       user: {
         username: 'abot'
       }
-    },
-    axios: {}
+    }
   };
+  let plugin = new WeatherPlugin(pal, {
+    openweather_api_key: 'not-a-real-api-key'
+  });
 
   // Returns a function that acts like axios and can be called.
   // The response is the response you'd like to be resolved.
@@ -73,7 +71,7 @@ describe('WeatherPlugin', function() {
         },
         reply: () => {}
       };
-      assert(plugin.handle_event('message', message_fixture, config_fixture));
+      assert(plugin.handle_event('message', message_fixture));
     });
     it('should return false if event type is not message', function() {
       assert(!plugin.handle_event('not_a_message', {}, {}));
@@ -93,7 +91,7 @@ describe('WeatherPlugin', function() {
           username: 'abot'
         }
       };
-      assert(plugin.handle_message(message_fixture, config_fixture));
+      assert(plugin.handle_message(message_fixture));
     });
     it('should not reply if message is from the bot', function() {
       let recorded_message = '';
@@ -117,7 +115,7 @@ describe('WeatherPlugin', function() {
         reply: () => {}
       };
 
-      assert(plugin.handle_message(message_fixture, config_fixture));
+      assert(plugin.handle_message(message_fixture));
     });
     it('should return true if message is correct', function() {
       let message_fixture = {
@@ -128,7 +126,7 @@ describe('WeatherPlugin', function() {
         reply: () => {}
       };
 
-      assert(plugin.handle_message(message_fixture, config_fixture));
+      assert(plugin.handle_message(message_fixture));
     });
 
     it('should reply with weather data when message is correct', function() {
@@ -169,7 +167,7 @@ describe('WeatherPlugin', function() {
         " **|** Wind: " +
         response.data.wind.speed;
 
-      plugin.handle_message(message_fixture, config_fixture);
+      plugin.handle_message(message_fixture);
 
       // wait 1 seconds to make sure the message gets recorded
       setTimeout(() => {
