@@ -125,5 +125,82 @@ describe('CoinbasePlugin', function() {
                      'eth - ETH to USD\n';
       assert.equal(recorded_message, expected);
     });
+    it('should send message with btc price when btc is first arg', function() {
+      let response = {
+        data: {
+          data: {
+            amount: '1000.00'
+          }
+        }
+      };
+      let axios_mock = build_axios_mock(response);
+
+      let plugin = new CoinbasePlugin(pal, {
+        axios: axios_mock
+      });
+
+      let recorded_message = '';
+      let message_fixture = {
+        content: '!coinbase btc',
+        author: {
+          username: 'notabot'
+        },
+        reply: (message) => {
+          recorded_message = message;
+        }
+      };
+
+      plugin.handle_message(message_fixture);
+      let expected = '\nFrom Coinbase | Current BTC in USD: $1000.00';
+
+      setTimeout(() => {
+        assert.equal(recorded_message, expected);
+      }, 1);
+    });
+    it('should send message with eth price when eth is first arg', function() {
+      let response = {
+        data: {
+          data: {
+            amount: '1000.00'
+          }
+        }
+      };
+      let axios_mock = build_axios_mock(response);
+
+      let plugin = new CoinbasePlugin(pal, {
+        axios: axios_mock
+      });
+
+      let recorded_message = '';
+      let message_fixture = {
+        content: '!coinbase eth',
+        author: {
+          username: 'notabot'
+        },
+        reply: (message) => {
+          recorded_message = message;
+        },
+      };
+
+      plugin.handle_message(message_fixture);
+      let expected = '\nFrom Coinbase | Current ETH in USD: $1000.00';
+      setTimeout(() => {
+        assert.equal(recorded_message, expected);
+      }, 1);
+    });
+    it('should send help message with bad first arg', function() {
+      let recorded_message = '';
+      let message_fixture = {
+        content: '!coinbase notacoin',
+        author: {
+          username: 'notabot'
+        },
+        reply: (message) => {
+          recorded_message = message;
+        },
+      };
+      plugin.handle_message(message_fixture);
+      assert.equal(recorded_message, plugin.help);
+    });
   });
 });

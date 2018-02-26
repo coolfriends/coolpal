@@ -43,6 +43,9 @@ class CoinbasePlugin extends Plugin {
     };
   }
 
+  /**
+   * @returns {string} A help message
+   */
   get help() {
     return '\nCheck Coinbase coin prices\n\n' +
       '!coinbase list\n' +
@@ -53,14 +56,24 @@ class CoinbasePlugin extends Plugin {
       'Print the current BTC value\n';
   }
 
-  /*
+  /**
    * @param {string} coin - Either eth or btc
    * @returns {string} A url of the form
    * 'https://api.coinbase.com/v2/prices/BTC-USD/buy'
    */
   coin_price_url(coin) {
     return this.base_url + "/prices/" +
-           this.coin_command_to_url_string(coin) + "/buy";
+           this.coin_command_to_url_string[coin] + "/buy";
+  }
+
+  /**
+   * @returns {bool} true if the coin is supported, or false
+   */
+  valid_coin(coin) {
+    if (this.coin_command_to_url_string[coin]) {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -94,29 +107,32 @@ class CoinbasePlugin extends Plugin {
     }
 
     // No coin provided in message
-    let coin = command_args[2];
-    if (coin === undefined || !this.valid_coin(coin)) {
+    if (!this.valid_coin(command_args[1])) {
       message.reply(this.help);
       return true;
     }
-    return this.call_bitcoin_api(message);
+    return this.call_coinbase_api(message, command_args[1]);
   }
 
-  
-
   /**
-   * Sends the user a message about the current Bitcoin price.
+   * Sends the user a message about the current Coinbase price.
    *
    * @param {Object} message - A Discord message event
    * @returns {bool} true if this plugin handled the event, or fales
    */
-  call_bitcoin_api(message) {
+  call_coinbase_api(message, coin) {
     this.axios({
       method: 'get',
-      url: this.url
+      url: this.coin_price_url(coin)
     }).then(response => {
-      message.reply("\nFrom Coinbase | Current Bitcoin price in USD: $" +
-        response.data.data.amount);
+      let reply_msg = "\nFrom Coinbase | Current ";
+      if (coin === 'eth') {
+        reply_msg += "ETH in USD: $";
+      } else {
+        reply_msg += "BTC in USD: $";
+      }
+      reply_msg += response.data.data.amount;
+      message.reply(reply_msg);
       return true;
     }).catch(error => {
       console.log();
