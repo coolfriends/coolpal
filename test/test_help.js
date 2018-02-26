@@ -163,5 +163,23 @@ describe('HelpPlugin', function() {
       let expected = 'The command no-help-mock does not have a help message.';
       assert.equal(recorded_message, expected);
     });
+    it('should list available help commands', function() {
+      let recorded_message = '';
+      let message_fixture = {
+        content: '!help list',
+        author: {
+          username: 'notabot'
+        },
+        reply: (message) => {
+          recorded_message = message;
+        }
+      };
+      plugin.handle_message(message_fixture);
+      let expected = '\nHere are commands with help available.\n' +
+                     'Call one with !help <command>\n' +
+                     'help\n' +
+                     'mock\n';
+      assert.equal(recorded_message, expected);
+    });
   });
 });

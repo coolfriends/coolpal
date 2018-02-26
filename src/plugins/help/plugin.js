@@ -58,6 +58,18 @@ class HelpPlugin extends Plugin {
       return true;
     }
 
+    if (command_args[1] === 'list') {
+      let reply_msg = '\nHere are commands with help available.\n' +
+                      'Call one with !help <command>\n';
+      for (let plugin of this.pal.plugins) {
+        if (plugin.help != undefined) {
+          reply_msg += plugin.command + '\n';
+        }
+      }
+      message.reply(reply_msg);
+      return true;
+    }
+
     for (let plugin of this.pal.plugins) {
       if (plugin.command === command_args[1]) {
         // Help message exists, so reply to message
