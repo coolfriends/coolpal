@@ -16,11 +16,7 @@
       }
     },
     {
-      "name": "bitcoin",
-      "configuration": {}
-    },
-    {
-      "name": "ethereum",
+      "name": "coinbase",
       "configuration": {}
     },
     {
