@@ -3,8 +3,8 @@ const utils = require('../utils.js');
 const Plugin = require('../plugin.js');
 
 class WeatherPlugin extends Plugin {
-  constructor(config = {}) {
-    super();
+  constructor(pal, config = {}) {
+    super(pal, config);
 
     /**
      * The name for this command
@@ -58,12 +58,12 @@ class WeatherPlugin extends Plugin {
 
   handle_message(message, config) {
     let command_args = utils.split_message(message);
-    if (command_args[0] != config.prefix + 'weather') {
+    if (command_args[0] != this.prefixed_command()) {
       return false;
     }
 
     // End run if the bot is the creator of the message
-    if (message.author.username == config.client.user.username) {
+    if (message.author.username == this.pal.client.user.username) {
       return true;
     }
 
@@ -116,7 +116,7 @@ class WeatherPlugin extends Plugin {
   city_choice_string(config) {
     let city_choice_string = '';
     for (let key of Object.keys(this.city_ids)) {
-      city_choice_string += config.prefix + 'weather ' + key + '\n';
+      city_choice_string += this.pal.prefix + 'weather ' + key + '\n';
     }
     return city_choice_string;
   }

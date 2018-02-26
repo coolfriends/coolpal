@@ -7,10 +7,11 @@ const Plugin = require('../plugin.js');
 class FeatureRequestPlugin extends Plugin {
   /**
    * @constructs FeatureRequestPlugin
+   * Overloaded from {@link Plugin#constructor}
    * @todo Add an e-mail list for the feature requests
    */
-  constructor() {
-    super();
+  constructor(pal, config={}) {
+    super(pal, config);
 
     /**
      * Overloaded from {@link Plugin#command}
@@ -56,17 +57,16 @@ class FeatureRequestPlugin extends Plugin {
   /**
    * Handles the message event for this plugin.
    *
-   * @param {string} message - A new feature request
-   * @param {string} username - A Discord username
-   * @returns {string[]} An array of feature requests
+   * @param {Object} message - A Discord message event
+   * @returns {bool} true if this plugin handled the event, or fales
    */
-  handle_message(message, config) {
+  handle_message(message) {
     let split_command = utils.split_message(message);
-    if (split_command[0] != this.prefixed_command(config)) {
+    if (split_command[0] != this.prefixed_command()) {
       return false;
     }
 
-    if (message.author.username === config.client.user.username) {
+    if (message.author.username === this.pal.client.user.username) {
       return true;
     }
 
@@ -84,11 +84,11 @@ class FeatureRequestPlugin extends Plugin {
       message.reply(reply_message);
     } else {
       let reply_message = 'This plugin will allow you to make new plugin requests\n\n' +
-            this.prefixed_command(config) + ' help\n' +
+            this.prefixed_command() + ' help\n' +
             'Displays this message again.\n\n' +
-            this.prefixed_command(config) + ' new this is where you type a request\n' +
+            this.prefixed_command() + ' new this is where you type a request\n' +
             'Adds a new request\n\n' +
-            this.prefixed_command(config) + ' list\n' +
+            this.prefixed_command() + ' list\n' +
             'List the requests you have made\n';
       message.reply(reply_message);
     }

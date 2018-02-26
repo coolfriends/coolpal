@@ -24,7 +24,6 @@ class CoolPal {
    *
    * @constructs CoolPal
    *
-   * @param {Object} config - The high level configuration object for CoolPal.
    * @param {string} config.token - A token for the Discord API.
    * @param {Object[]} config.plugins - Plugins to enable.
    * @param {string} config.plugins[].name - The name of a plugin.
@@ -34,11 +33,6 @@ class CoolPal {
    */
   constructor(config) {
     /**
-     * @member {Object} CoolPal#config - The high level configuration object for CoolPal.
-     */
-    this.config = config;
-
-    /**
      * @member {Object} CoolPal#client - A Discord API client.
      */
     this.client = new Discord.Client();
@@ -46,12 +40,12 @@ class CoolPal {
     /**
      * @member {Object} CoolPal#discord_token - A Discord bot API token.
      */
-    this.discord_token = this.config.token;
+    this.discord_token = config.token;
 
     /**
      * @member {Object[]} CoolPal#prefix - The prefix for all plugin commands.
      */
-    this.prefix = this.config.prefix || '!';
+    this.prefix = config.prefix || '!';
 
     /**
      * @member {Object[]} CoolPal#_event_types - A list of unique event types.
@@ -65,8 +59,15 @@ class CoolPal {
      */
     this._plugins = [];
 
+    /**
+     * @member {Object} CoolPal#_pal_config - The high level configuration object for CoolPal.
+     * It is the original configuration passed in during initialization.
+     */
+    this._pal_config = config;
+
+
     // End of member variables
-    this._configure_plugins(this.config.plugins);
+    this._configure_plugins(config.plugins);
   }
 
   /**
@@ -113,7 +114,7 @@ class CoolPal {
    */
   _configure_plugin(plugin_config) {
     let plugin_class = plugin_name_to_class[plugin_config.name];
-    return new plugin_class(plugin_config.configuration);
+    return new plugin_class(this, plugin_config.configuration);
   }
 
   /**
@@ -177,10 +178,7 @@ class CoolPal {
   _receive_event(event_type) {
     this.client.on(event_type, event => {
       for (let plugin of this._plugins) {
-        let handled_event = plugin.handle_event(event_type, event, {
-          client: this.client,
-          prefix: this.prefix
-        });
+        let handled_event = plugin.handle_event(event_type, event);
       }
     });
   }
