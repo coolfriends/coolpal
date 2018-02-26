@@ -181,5 +181,20 @@ describe('HelpPlugin', function() {
                      'mock\n';
       assert.equal(recorded_message, expected);
     });
+    it('should return bad command message if plugin with command does not exist', function() {
+      let recorded_message = '';
+      let message_fixture = {
+        content: '!help this-command-is-not-implemented',
+        author: {
+          username: 'notabot'
+        },
+        reply: (message) => {
+          recorded_message = message;
+        }
+      };
+      plugin.handle_message(message_fixture);
+      let expected = 'The plugin this-command-is-not-implemented is not a valid command.\n';
+      assert.equal(recorded_message, expected);
+    });
   });
 });

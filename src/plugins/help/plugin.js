@@ -83,7 +83,7 @@ class HelpPlugin extends Plugin {
       }
     }
 
-    message.reply("The plugin " + command_args[1] + " is not a valid command.");
+    message.reply("The plugin " + command_args[1] + " is not a valid command.\n");
     return true;
   }
 };
