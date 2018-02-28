@@ -212,10 +212,5 @@ describe('GoogleNewsPlugin', function() {
         assert(plugin.call_google_news_rss(message_fixture));
       }, 1);
     });
-    it('should return true if google news search succeeds', function () {
-      setTimeout(() => {
-        assert(plugin.call_google_news_rss(message_fixture));
-      }, 1);
-    });
   });
 });
