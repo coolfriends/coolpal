@@ -52,13 +52,26 @@ class WeatherPlugin extends Plugin {
     this.axios = config.axios || axios.create();
   }
 
+  /**
+   * @returns {string} A help message
+   */
+  get help() {
+    return '\nCheck the current weather\n\n' +
+      this.prefixed_command + ' help\n' +
+      'Displays this message again.\n' +
+      this.prefixed_command + ' Denton\n' +
+      'Replies with the weather conditions for Denton\n' +
+      this.prefixed_command + ' <any-city>\n' +
+      'Replies with the weather conditions for the city\n';
+  }
+
   weather_url(city) {
     return this.base_url + '/data/2.5/weather?q=' + city + '&units=' + this.units + '&APPID=' + this.openweather_api_key;
   }
 
   handle_message(message, config) {
     let command_args = utils.split_message(message);
-    if (command_args[0] != this.prefixed_command()) {
+    if (command_args[0] != this.prefixed_command) {
       return false;
     }
 

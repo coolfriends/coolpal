@@ -48,12 +48,12 @@ class CoinbasePlugin extends Plugin {
    */
   get help() {
     return '\nCheck Coinbase coin prices\n\n' +
-      '!coinbase list\n' +
-      'Displays the available coins\n' +
-      '!coinbase etc\n' +
-      'Prints the current ETC value\n\n' +
-      '!coinbase btc\n' +
-      'Print the current BTC value\n';
+           this.prefixed_command + ' list\n' +
+           'Displays the available coins\n' +
+           this.prefixed_command + ' eth\n' +
+           'Prints the current ETH value\n\n' +
+           this.prefixed_command + ' btc\n' +
+           'Print the current BTC value\n';
   }
 
   /**
@@ -80,12 +80,12 @@ class CoinbasePlugin extends Plugin {
    * Sends the user a message about a coin price from Coinbase.
    *
    * @param {Object} message - A Discord message event
-   * @returns {bool} true if this plugin handled the event, or fales
+   * @returns {bool} true if this plugin handled the event, or false
    */
   handle_message(message) {
     let command_args = utils.split_message(message);
 
-    if (command_args[0] != this.prefixed_command()) {
+    if (command_args[0] != this.prefixed_command) {
       return false;
     }
 
