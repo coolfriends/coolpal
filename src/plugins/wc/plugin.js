@@ -12,9 +12,9 @@ class WCPlugin extends Plugin {
     this.wc_secret_key = config.wc_secret_key || process.env.WC_SECRET_KEY;
   }
 
-  handle_message(message, config) {
+  handle_message(message) {
     let command_args = utils.split_message(message);
-    if (command_args[0] != this.prefixed_command()) {
+    if (command_args[0] != this.prefixed_command) {
       return false;
     }
 

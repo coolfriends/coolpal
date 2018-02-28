@@ -48,9 +48,11 @@ class Plugin {
   }
 
   /**
-   *
+   * Generate the prefixed command for this plugin. Used to match against when
+   * checking user input.
+   * @returns {string} A prefix appended to the command name defined for the plugin.
    */
-  prefixed_command() {
+  get prefixed_command() {
     return this.pal.prefix + this.command;
   }
 

@@ -45,7 +45,7 @@ class HelpPlugin extends Plugin {
   handle_message(message) {
     let command_args = utils.split_message(message);
 
-    if (command_args[0] != this.prefixed_command()) {
+    if (command_args[0] != this.prefixed_command) {
       return false;
     }
 

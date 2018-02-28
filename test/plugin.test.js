@@ -55,7 +55,7 @@ describe('Plugin', function() {
 
     it('should return a given command with prefix', function() {
       let expected = "!testcommand";
-      assert.equal(plugin_mock.prefixed_command(), expected);
+      assert.equal(plugin_mock.prefixed_command, expected);
     });
 
   });

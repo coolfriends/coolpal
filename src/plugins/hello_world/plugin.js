@@ -9,7 +9,7 @@ class HelloWorldPlugin extends Plugin {
 
   handle_message(message, config) {
     // Make sure author of the message is not the bot
-    if (message.content.startsWith(this.prefixed_command())) {
+    if (message.content.startsWith(this.prefixed_command)) {
       if (message.author.username != this.pal.client.user.username) {
         message.reply("Hello, world!");
       }

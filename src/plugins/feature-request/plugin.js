@@ -55,6 +55,19 @@ class FeatureRequestPlugin extends Plugin {
   }
 
   /**
+   * @returns {string} A help message
+   */
+  get help() {
+    return 'This plugin will allow you to make new plugin requests\n\n' +
+           this.prefixed_command + ' help\n' +
+           'Displays this message again.\n\n' +
+           this.prefixed_command + ' new this is where you type a request\n' +
+           'Adds a new request\n\n' +
+           this.prefixed_command + ' list\n' +
+           'List the requests you have made\n';
+  }
+
+  /**
    * Handles the message event for this plugin.
    *
    * @param {Object} message - A Discord message event
@@ -62,7 +75,7 @@ class FeatureRequestPlugin extends Plugin {
    */
   handle_message(message) {
     let split_command = utils.split_message(message);
-    if (split_command[0] != this.prefixed_command()) {
+    if (split_command[0] != this.prefixed_command) {
       return false;
     }
 
@@ -83,14 +96,7 @@ class FeatureRequestPlugin extends Plugin {
       }
       message.reply(reply_message);
     } else {
-      let reply_message = 'This plugin will allow you to make new plugin requests\n\n' +
-            this.prefixed_command() + ' help\n' +
-            'Displays this message again.\n\n' +
-            this.prefixed_command() + ' new this is where you type a request\n' +
-            'Adds a new request\n\n' +
-            this.prefixed_command() + ' list\n' +
-            'List the requests you have made\n';
-      message.reply(reply_message);
+      message.reply(this.help);
     }
 
     return true;
