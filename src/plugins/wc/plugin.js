@@ -4,22 +4,22 @@ const utils = require('../utils.js');
 const Plugin = require('../plugin.js');
 
 class WCPlugin extends Plugin {
-  constructor(config={}) {
-    super();
+  constructor(pal, config={}) {
+    super(pal, config);
     this.command = 'wc';
     this.supported_event_types = ['message'];
     this.base_url = config.base_url || process.env.WC_URL;
     this.wc_secret_key = config.wc_secret_key || process.env.WC_SECRET_KEY;
   }
 
-  handle_message(message, config) {
+  handle_message(message) {
     let command_args = utils.split_message(message);
-    if (command_args[0] != this.prefixed_command(config)) {
+    if (command_args[0] != this.prefixed_command) {
       return false;
     }
 
     // Message was created by the bot
-    if (message.author.username == config.client.user.username) {
+    if (message.author.username == this.pal.client.user.username) {
       return true;
     }
 

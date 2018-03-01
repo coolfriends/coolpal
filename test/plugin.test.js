@@ -2,8 +2,8 @@ const assert = require('assert');
 const Plugin = require('../src/plugins/plugin.js');
 
 class PluginMock extends Plugin {
-  constructor() {
-    super();
+  constructor(pal, config={}) {
+    super(pal, config);
     this.command = 'testcommand';
     this.supported_event_types = [];
   }
@@ -15,11 +15,11 @@ class PluginMock extends Plugin {
 
 describe('Plugin', function() {
 
-  let plugin = new Plugin();
-  let plugin_mock = new PluginMock();
-  let config_fixture = {
+  let pal = {
     prefix: '!'
   };
+  let plugin = new Plugin(pal, {});
+  let plugin_mock = new PluginMock(pal);
 
   describe('#constructor()', function() {
     describe('support_event_types', function() {
@@ -55,7 +55,7 @@ describe('Plugin', function() {
 
     it('should return a given command with prefix', function() {
       let expected = "!testcommand";
-      assert.equal(plugin_mock.prefixed_command(config_fixture), expected);
+      assert.equal(plugin_mock.prefixed_command, expected);
     });
 
   });
