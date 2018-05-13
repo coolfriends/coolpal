@@ -11,7 +11,7 @@ class SpamPlugin extends Plugin {
   handle_message(message, config) {
     let command_args = utils.split_message(message);
     // Make sure author of the message is not the bot
-    if (command_args[0] != config.prefix + 'spam') {
+    if (command_args[0] != this.prefixed_command) {
       return false;
     }
 
