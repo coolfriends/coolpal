@@ -34,10 +34,10 @@ class GoogleNewsPlugin extends Plugin {
    */
   get help() {
     return '\nFetch news from Google\n\n' +
-           '!news help\n' +
-           'Displays this message\n' +
-           '!news any topics\n' +
-           'Replies with a search result from Google\n';
+      '!news help\n' +
+      'Displays this message\n' +
+      '!news any topics\n' +
+      'Replies with a search result from Google\n';
   }
 
   /**
@@ -52,16 +52,13 @@ class GoogleNewsPlugin extends Plugin {
     if (command_args[0] != this.prefixed_command) {
       return false;
     }
-
     if (message.author.username === this.pal.client.user.username) {
       return true;
     }
-
     if (command_args[1] === undefined || command_args[1] === 'help') {
       message.reply(this.help);
       return true;
     }
-
     // Query Google News for the top story related to message
     return this.call_google_news_rss(message);
   }
@@ -84,11 +81,11 @@ class GoogleNewsPlugin extends Plugin {
       .search(String(search_query))
       .then(resp => {
         message.reply("\nThe Top Result from Google News. . .\n\n" +
-                      "------------------------------------\n" +
-                      "Query: " + search_query + "\n" +
-                      "------------------------------------\n\n" +
-                      resp[0].title + "\n\n" +
-                      resp[0].link + "\n");
+          "------------------------------------\n" +
+          "Query: " + search_query + "\n" +
+          "------------------------------------\n\n" +
+          resp[0].title + "\n\n" +
+          resp[0].link + "\n");
         return true;
       }).catch(error => {
         let msg = "Failed to get results for " + search_query + "\n";
