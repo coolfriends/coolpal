@@ -27,13 +27,13 @@ class HelpPlugin extends Plugin {
    * @returns {string} A help message
    */
   get help() {
-    return '\nRequest help for a plugin prices\n\n' +
+    return '\n\nRequest help for a plugin:\n\n' +
       '!help list\n' +
-      'Lists plugins that you can request help for\n' +
+      'Lists plugins that you can request help for\n\n' +
       '!help help\n' +
-      'Prints this message\n' +
+      'Prints this message\n\n' +
       '!help <supported_plugin>\n' +
-      'Prints the help for a supported plugin (see !help list)\n';
+      'Prints the help for a supported plugin (see !help list)\n\n';
   }
 
   /**
@@ -44,20 +44,16 @@ class HelpPlugin extends Plugin {
    */
   handle_message(message) {
     let command_args = utils.split_message(message);
-
     if (command_args[0] != this.prefixed_command) {
       return false;
     }
-
     if (message.author.username === this.pal.client.user.username) {
       return true;
     }
-
     if (command_args[1] === undefined || command_args[1] === 'help') {
       message.reply(this.help);
       return true;
     }
-
     if (command_args[1] === 'list') {
       let reply_msg = '\nHere are commands with help available.\n' +
                       'Call one with !help <command>\n';
@@ -78,12 +74,11 @@ class HelpPlugin extends Plugin {
           return true;
         }
         // Help is not implemented on plugin
-        message.reply("The command " + plugin.command + " does not have a help message.");
+        message.reply("The plugin " + plugin.command + " does not have a help message.");
         return true;
       }
     }
-
-    message.reply("The plugin " + command_args[1] + " is not a valid command.\n");
+    message.reply("The plugin " + command_args[1] + " does not have a valid help command.\n\n");
     return true;
   }
 };

@@ -47,13 +47,13 @@ class CoinbasePlugin extends Plugin {
    * @returns {string} A help message
    */
   get help() {
-    return '\nCheck Coinbase coin prices\n\n' +
+    return '\n\nCheck Coinbase for current coin prices\n\n' +
            this.prefixed_command + ' list\n' +
-           'Displays the available coins\n' +
+           'Displays the available coins\n\n' +
            this.prefixed_command + ' eth\n' +
            'Prints the current ETH value\n\n' +
            this.prefixed_command + ' btc\n' +
-           'Print the current BTC value\n';
+           'Print the current BTC value\n\n';
   }
 
   /**

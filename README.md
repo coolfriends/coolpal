@@ -38,6 +38,11 @@ Run bot
 npm start
 ```
 
+Run bot as daemon with Forever from source directory
+```bash
+forever start --minUptime 100000000 ./bin/prod_bundle.min.js
+```
+
 ### Build docker image and run coolpal in container
 Make sure you have docker installed: https://docs.docker.com/engine/installation/
 
