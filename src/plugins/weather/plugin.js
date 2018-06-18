@@ -61,6 +61,7 @@ class WeatherPlugin extends Plugin {
         "Observation Time: " + result[0].current.observationtime + "\n" +
         "Temperature (in F): " + result[0].current.temperature + "\n" +
         "Feels like (in F): " + result[0].current.feelslike + "\n" +
+        "Conditions: " + result[0].current.skytext + "\n" +
         "Humidity: " + result[0].current.humidity + "\n" +
         "Wind: " + result[0].current.winddisplay + "\n"
       );
