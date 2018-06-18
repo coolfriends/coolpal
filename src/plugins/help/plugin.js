@@ -74,11 +74,12 @@ class HelpPlugin extends Plugin {
           return true;
         }
         // Help is not implemented on plugin
-        message.reply("The plugin " + plugin.command + " does not have a help message.");
+        message.reply(plugin.command + " does not have a help message.\n");
         return true;
       }
     }
-    message.reply("The plugin " + command_args[1] + " does not have a valid help command.\n\n");
+    // Plugin does not exist
+    message.reply(command_args[1] + " is not a valid command.\n");
     return true;
   }
 };

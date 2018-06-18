@@ -12,6 +12,13 @@ class WeatherPlugin extends Plugin {
     this.command = 'weather';
 
     /**
+     * The weather API client.
+     *
+     * This is an instance variable so a mock can easily be injected for testing.
+     **/
+    this.weather_client = config.weather_client || weather;
+
+    /**
      * The event types this plugin supports
      * @type {string[]}
      */
@@ -51,7 +58,7 @@ class WeatherPlugin extends Plugin {
   }
 
   call_weather_js(message, city) {
-    weather.find({
+    this.weather_client.find({
       search: city,
       degreeType: 'F'
     }, function(err, result) {
