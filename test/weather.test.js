@@ -39,28 +39,6 @@ describe('WeatherPlugin', function() {
         assert.deepEqual(plugin.supported_event_types, ['message']);
       });
     });
-    describe('openweather_api_key', function() {
-      it('should use the config variable to pass in openweather api key', function() {
-        assert.equal(plugin.openweather_api_key, 'not-a-real-api-key');
-      });
-      it('should use the env variable OPENWEATHER_API_KEY if none is provided', function() {
-        let plugin = new WeatherPlugin;
-        assert.equal(plugin.openweather_api_key, 'also-not-a-real-api-key');
-      });
-    });
-    describe('base_url', function() {
-      it('should be correct', function() {
-        assert.equal(plugin.base_url, 'http://api.openweathermap.org');
-      });
-    });
-    describe('units', function() {
-      it('should be able to provide a unit type', function() {
-        let plugin = new WeatherPlugin({
-          units: 'Metric'
-        });
-        assert(plugin.units, 'Metric');
-      });
-    });
   });
   describe('#handle_event()', function() {
     it('should return true if message if well formatted', function() {
@@ -78,12 +56,6 @@ describe('WeatherPlugin', function() {
     });
   });
   describe('#handle_message()', function() {
-    it('should return false if the first argument is not a match', function() {
-      let message_fixture = {
-        content: '!notweather'
-      };
-      assert(!plugin.handle_message(message_fixture, {}));
-    });
     it('should return true if message is from the bot', function() {
       let message_fixture = {
         content: '!weather',
@@ -130,24 +102,27 @@ describe('WeatherPlugin', function() {
     });
 
     it('should reply with weather data when message is correct', function() {
-      let response = {
-        data: {
-          cod: 200,
-          main: {
-            temp: '70'
-          },
-          weather: [{
-            description: 'sunny'
-          }],
-          wind: {
-            speed: '10'
+      let plugin = new WeatherPlugin(pal, {
+        weather_client: {
+          find: (obj, cb) => {
+            cb(null, [
+              {
+                location: {
+                  name: 'blah'
+                },
+                current: {
+                  date: 'blah',
+                  observationtime: 'blah',
+                  temperature: 'blah',
+                  feelslike: 'blah',
+                  skytext: 'blah',
+                  humidity: 'blah',
+                  winddisplay: 'blah'
+                }
+              }
+            ]);
           }
         }
-      };
-      let axios_mock = build_axios_mock(response);
-      let plugin = new WeatherPlugin({
-        openweather_api_key: 'not-a-real-api-key',
-        axios: axios_mock
       });
       // Make sure that the string passed to message.reply is captured.
       let recorded_message = '';
@@ -160,12 +135,14 @@ describe('WeatherPlugin', function() {
           recorded_message = message;
         }
       };
-      let expected = "\nTemp: " +
-        response.data.main.temp +
-        " **|** Weather: " +
-        response.data.weather[0].description +
-        " **|** Wind: " +
-        response.data.wind.speed;
+      let expected = 'Current forecast for: blah\n' +
+            'Date: blah\n' +
+            'Observation Time: blah\n' +
+            'Temperature (in F): blah\n' +
+            'Feels like (in F): blah\n' +
+            'Conditions: blah\n' +
+            'Humidity: blah\n' +
+            'Wind: blah\n';
 
       plugin.handle_message(message_fixture);
 

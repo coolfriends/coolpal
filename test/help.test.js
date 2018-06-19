@@ -100,13 +100,13 @@ describe('HelpPlugin', function() {
           recorded_message = message;
         }
       };
-      let expected = '\nRequest help for a plugin prices\n\n' +
+      let expected = '\n\nRequest help for a plugin:\n\n' +
                      '!help list\n' +
-                     'Lists plugins that you can request help for\n' +
+                     'Lists plugins that you can request help for\n\n' +
                      '!help help\n' +
-                     'Prints this message\n' +
+                     'Prints this message\n\n' +
                      '!help <supported_plugin>\n' +
-                     'Prints the help for a supported plugin (see !help list)\n';
+                     'Prints the help for a supported plugin (see !help list)\n\n';
 
       plugin.handle_message(message_fixture);
       assert.equal(recorded_message, expected);
@@ -122,13 +122,13 @@ describe('HelpPlugin', function() {
           recorded_message = message;
         }
       };
-      let expected = '\nRequest help for a plugin prices\n\n' +
-                     '!help list\n' +
-                     'Lists plugins that you can request help for\n' +
-                     '!help help\n' +
-                     'Prints this message\n' +
-                     '!help <supported_plugin>\n' +
-                     'Prints the help for a supported plugin (see !help list)\n';
+      let expected = '\n\nRequest help for a plugin:\n\n' +
+            '!help list\n' +
+            'Lists plugins that you can request help for\n\n' +
+            '!help help\n' +
+            'Prints this message\n\n' +
+            '!help <supported_plugin>\n' +
+            'Prints the help for a supported plugin (see !help list)\n\n';
 
       plugin.handle_message(message_fixture);
       assert.equal(recorded_message, expected);
@@ -146,21 +146,6 @@ describe('HelpPlugin', function() {
       };
       plugin.handle_message(message_fixture);
       let expected = 'A help message\n';
-      assert.equal(recorded_message, expected);
-    });
-    it('should send help does not exist message for plugin with no help', function() {
-      let recorded_message = '';
-      let message_fixture = {
-        content: '!help no-help-mock',
-        author: {
-          username: 'notabot'
-        },
-        reply: (message) => {
-          recorded_message = message;
-        }
-      };
-      plugin.handle_message(message_fixture);
-      let expected = 'The command no-help-mock does not have a help message.';
       assert.equal(recorded_message, expected);
     });
     it('should list available help commands', function() {
@@ -181,6 +166,21 @@ describe('HelpPlugin', function() {
                      'mock\n';
       assert.equal(recorded_message, expected);
     });
+    it('should return command DNE message if no matching plugin', function() {
+      let recorded_message = '';
+      let message_fixture = {
+        content: '!help no-help-mock',
+        author: {
+          username: 'notabot'
+        },
+        reply: (message) => {
+          recorded_message = message;
+        }
+      };
+      plugin.handle_message(message_fixture);
+      let expected = 'no-help-mock does not have a help message.\n';
+      assert.equal(recorded_message, expected);
+    });
     it('should return bad command message if plugin with command does not exist', function() {
       let recorded_message = '';
       let message_fixture = {
@@ -193,7 +193,7 @@ describe('HelpPlugin', function() {
         }
       };
       plugin.handle_message(message_fixture);
-      let expected = 'The plugin this-command-is-not-implemented is not a valid command.\n';
+      let expected = 'this-command-is-not-implemented is not a valid command.\n';
       assert.equal(recorded_message, expected);
     });
   });

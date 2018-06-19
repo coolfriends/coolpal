@@ -7,7 +7,7 @@ class Plugin {
    * @param {Object} pal - A {@link CoolPal} instance.
    * @param {Object} [config={}] - The optional configuration for a plugin.
    */
-  constructor(pal, config={}) {
+  constructor(pal, config = {}) {
     /**
      * @member {Object} pal - A reference to the calling {@link CoolPal} instance.
      */
@@ -24,6 +24,11 @@ class Plugin {
      * implemented. The only supported event type right now is message.
      */
     this.supported_event_types = [];
+
+    /**
+     * @member {char} Plugin#prefix - A char to prefix commands for the bot to execute
+     */
+    this.prefix = '!';
   }
 
   /**
@@ -53,7 +58,7 @@ class Plugin {
    * @returns {string} A prefix appended to the command name defined for the plugin.
    */
   get prefixed_command() {
-    return this.pal.prefix + this.command;
+    return this.prefix + this.command;
   }
 
   /**

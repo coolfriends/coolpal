@@ -86,13 +86,13 @@ describe('CoinbasePlugin', function() {
         }
       };
       plugin.handle_message(message_fixture);
-      let expected = '\nCheck Coinbase coin prices\n\n' +
+      let expected = '\n\nCheck Coinbase for current coin prices\n\n' +
             '!coinbase list\n' +
-            'Displays the available coins\n' +
+            'Displays the available coins\n\n' +
             '!coinbase eth\n' +
             'Prints the current ETH value\n\n' +
             '!coinbase btc\n' +
-            'Print the current BTC value\n';
+            'Print the current BTC value\n\n';
       assert.equal(recorded_message, expected);
     });
     it('should send help message in reply if first arg is help', function() {
@@ -107,13 +107,13 @@ describe('CoinbasePlugin', function() {
         }
       };
       plugin.handle_message(message_fixture);
-      let expected = '\nCheck Coinbase coin prices\n\n' +
+      let expected = '\n\nCheck Coinbase for current coin prices\n\n' +
                      '!coinbase list\n' +
-                     'Displays the available coins\n' +
+                     'Displays the available coins\n\n' +
                      '!coinbase eth\n' +
                      'Prints the current ETH value\n\n' +
                      '!coinbase btc\n' +
-                     'Print the current BTC value\n';
+                     'Print the current BTC value\n\n';
       assert.equal(recorded_message, expected);
     });
     it('should send message about available coins when list is first arg', function() {
