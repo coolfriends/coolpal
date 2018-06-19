@@ -1,7 +1,7 @@
-const assert = require('assert');
-const axios = require('axios');
+import assert from 'assert';
+import axios from 'axios';
 
-const CoinbasePlugin = require('../src/plugins/coinbase/plugin.js');
+import CoinbasePlugin from '../lib/plugins/coinbase/plugin.js';
 
 describe('CoinbasePlugin', function() {
   let pal = {

@@ -1,5 +1,5 @@
-const assert = require('assert');
-const Plugin = require('../src/plugins/plugin.js');
+import assert from 'assert';
+import Plugin from '../lib/plugins/plugin.js';
 
 class PluginMock extends Plugin {
   constructor(pal, config={}) {

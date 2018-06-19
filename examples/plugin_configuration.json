@@ -11,9 +11,7 @@
     },
     {
       "name": "weather",
-      "configuration": {
-        "openweather_api_key": ""
-      }
+      "configuration": {}
     },
     {
       "name": "coinbase",

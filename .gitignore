@@ -11,3 +11,5 @@ package-lock.json
 .coolpal.json
 
 coverage/
+
+dist/

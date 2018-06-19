@@ -1,6 +1,5 @@
-const fs = require('fs');
-const assert = require('assert');
-const CoolPal = require('../src/coolpal.js');
+import fs from 'fs';
+import CoolPal from '../lib/coolpal.js';
 
 
 describe('CoolPal', function() {
@@ -23,22 +22,7 @@ describe('CoolPal', function() {
     for (let plugin of bot._plugins) {
       found_commands.push(plugin.command);
     }
-    assert.deepEqual(commands, found_commands);
-  });
-  it('can load plugins using a JSON object', function() {
-    let commands = ['helloworld', 'spam'];
-    let found_commands = [];
-    fs.readFile('./plugin_configuration.json', (err, data) => {
-      if (err) {
-        throw err;
-      }
-      let configuration = JSON.parse(data);
-      let bot = new CoolPal(configuration);
-      for (let plugin of bot._plugins) {
-        found_commands.push(plugin.command);
-      }
-      assert.deepEqual(commands, found_commands);
-    });
+    expect(commands).toEqual(found_commands);
   });
 });
 
