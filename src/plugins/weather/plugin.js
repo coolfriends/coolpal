@@ -40,7 +40,7 @@ class WeatherPlugin extends Plugin {
       'Replies with the weather conditions for the Zipcode 98121\n';
   }
 
-  handle_message(message, config) {
+  async handle_message(message, config) {
     let command_args = utils.split_message(message);
     if (command_args[0] != this.prefixed_command) {
       return false;
@@ -53,26 +53,35 @@ class WeatherPlugin extends Plugin {
     if (command_args[2]) {
       city = city + command_args[2];
     }
-    this.call_weather_js(message, city);
+
+    let weather_result = await this.call_weather_js(city);
+    message.reply(this.build_message(weather_result));
+
     return true;
   }
 
-  call_weather_js(message, city) {
-    this.weather_client.find({
-      search: city,
-      degreeType: 'F'
-    }, function(err, result) {
-      if (err) console.log(err);
-      message.reply("Current forecast for: " + result[0].location.name + "\n" +
-        "Date: " + result[0].current.date + "\n" +
-        "Observation Time: " + result[0].current.observationtime + "\n" +
-        "Temperature (in F): " + result[0].current.temperature + "\n" +
-        "Feels like (in F): " + result[0].current.feelslike + "\n" +
-        "Conditions: " + result[0].current.skytext + "\n" +
-        "Humidity: " + result[0].current.humidity + "\n" +
-        "Wind: " + result[0].current.winddisplay + "\n"
-      );
+  call_weather_js(city) {
+    return new Promise((resolve, reject) => {
+      this.weather_client.find({
+        search: city,
+        degreeType: 'F'
+      }, function(err, result) {
+        if (err) reject(err);
+        resolve(result);
+      });
     });
+  }
+
+  build_message(result) {
+    return ("Current forecast for: " + result[0].location.name + "\n" +
+            "Date: " + result[0].current.date + "\n" +
+            "Observation Time: " + result[0].current.observationtime + "\n" +
+            "Temperature (in F): " + result[0].current.temperature + "\n" +
+            "Feels like (in F): " + result[0].current.feelslike + "\n" +
+            "Conditions: " + result[0].current.skytext + "\n" +
+            "Humidity: " + result[0].current.humidity + "\n" +
+            "Wind: " + result[0].current.winddisplay + "\n"
+           );
   }
 };
 

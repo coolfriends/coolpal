@@ -56,12 +56,6 @@ describe('WeatherPlugin', function() {
     });
   });
   describe('#handle_message()', function() {
-    it('should return false if the first argument is not a match', function() {
-      let message_fixture = {
-        content: '!notweather'
-      };
-      assert(!plugin.handle_message(message_fixture, {}));
-    });
     it('should return true if message is from the bot', function() {
       let message_fixture = {
         content: '!weather',
