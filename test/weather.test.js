@@ -1,12 +1,6 @@
-const assert = require('assert');
-const axios = require('axios');
+import WeatherPlugin from '../lib/plugins/weather/plugin';
 
-const WeatherPlugin = require('../src/plugins/weather/plugin.js');
-
-describe('WeatherPlugin', function() {
-  // Override opeanweather api key
-  process.env.OPENWEATHER_API_KEY = 'also-not-a-real-api-key';
-
+describe('WeatherPlugin', () => {
   let pal = {
     prefix: '!',
     client: {
@@ -15,33 +9,17 @@ describe('WeatherPlugin', function() {
       }
     }
   };
-  let plugin = new WeatherPlugin(pal, {
-    openweather_api_key: 'not-a-real-api-key'
-  });
+  let plugin = new WeatherPlugin(pal);
 
-  // Returns a function that acts like axios and can be called.
-  // The response is the response you'd like to be resolved.
-  // If error is provided, the function will reject the error.
-  let build_axios_mock = (response, error) => {
-    return () => {
-      return new Promise((resolve, reject) => {
-        if (error) {
-          reject(error);
-        }
-        resolve(response);
-      });
-    };
-  };
-
-  describe('#constructor()', function() {
-    describe('supported_event_types', function() {
-      it('should only support the message event type', function() {
-        assert.deepEqual(plugin.supported_event_types, ['message']);
+  describe('#constructor()', () => {
+    describe('supported_event_types', () => {
+      it('should only support the message event type', () => {
+        expect(plugin.supported_event_types).toEqual(['message']);
       });
     });
   });
-  describe('#handle_event()', function() {
-    it('should return true if message if well formatted', function() {
+  describe('#handle_event()', () => {
+    it('should return true if message if well formatted', () => {
       let message_fixture = {
         content: '!weather denton',
         author: {
@@ -49,23 +27,23 @@ describe('WeatherPlugin', function() {
         },
         reply: () => {}
       };
-      assert(plugin.handle_event('message', message_fixture));
+      expect(plugin.handle_event('message', message_fixture)).toBeTruthy();
     });
-    it('should return false if event type is not message', function() {
-      assert(!plugin.handle_event('not_a_message', {}, {}));
+    it('should return false if event type is not message', () => {
+      expect(plugin.handle_event('not_a_message', {}, {})).toBeFalsy();
     });
   });
-  describe('#handle_message()', function() {
-    it('should return true if message is from the bot', function() {
+  describe('#handle_message()', () => {
+    it('should return true if message is from the bot', () => {
       let message_fixture = {
         content: '!weather',
         author: {
           username: 'abot'
         }
       };
-      assert(plugin.handle_message(message_fixture));
+      expect(plugin.handle_message(message_fixture)).toBeTruthy();
     });
-    it('should not reply if message is from the bot', function() {
+    it('should not reply if message is from the bot', () => {
       let recorded_message = '';
       let message_fixture = {
         content: '!weather',
@@ -76,9 +54,9 @@ describe('WeatherPlugin', function() {
           recorded_message = message;
         }
       };
-      assert.equal(recorded_message, '');
+      expect(recorded_message).toEqual('');
     });
-    it('should return true if city is not supported', function() {
+    it('should return true if city is not supported', () => {
       let message_fixture = {
         content: '!weather not_a_supported_city',
         author: {
@@ -87,9 +65,9 @@ describe('WeatherPlugin', function() {
         reply: () => {}
       };
 
-      assert(plugin.handle_message(message_fixture));
+      expect(plugin.handle_message(message_fixture)).toBeTruthy();
     });
-    it('should return true if message is correct', function() {
+    it('should return true if message is correct', () => {
       let message_fixture = {
         content: '!weather denton',
         author: {
@@ -98,10 +76,10 @@ describe('WeatherPlugin', function() {
         reply: () => {}
       };
 
-      assert(plugin.handle_message(message_fixture));
+      expect(plugin.handle_message(message_fixture)).toBeTruthy();
     });
 
-    it('should reply with weather data when message is correct', function() {
+    it('should reply with weather data when message is correct', () => {
       let plugin = new WeatherPlugin(pal, {
         weather_client: {
           find: (obj, cb) => {
@@ -148,7 +126,7 @@ describe('WeatherPlugin', function() {
 
       // wait 1 seconds to make sure the message gets recorded
       setTimeout(() => {
-        assert.equal(recorded_message, expected);
+        expect(recorded_message).toEqual(expected);
       }, 1);
     });
   });

@@ -1,5 +1,4 @@
-const assert = require('assert');
-const FeatureRequestPlugin = require('../src/plugins/feature-request/plugin.js');
+import FeatureRequestPlugin from '../lib/plugins/feature-request/plugin.js';
 
 describe('FeatureRequestPlugin', function() {
   let bot_user_name = 'abot';
@@ -13,14 +12,6 @@ describe('FeatureRequestPlugin', function() {
   };
   let plugin = new FeatureRequestPlugin(pal);
 
-  describe('#constructor()', function() {
-    describe('support_event_types', function() {
-      it('should only have message for its supported event types', function() {
-        assert.deepEqual(plugin.supported_event_types, ['message']);
-      });
-    });
-  });
-
   describe('#handle_message()', function() {
     it('should return false if the message command is not correct', function() {
       let recorded_message = '';
@@ -31,7 +22,7 @@ describe('FeatureRequestPlugin', function() {
         content: '!not-feature-request',
         reply: () => {}
       };
-      assert(!plugin.handle_message(message_fixture));
+      expect(plugin.handle_message(message_fixture)).toBeFalsy();
     });
     it('should return true if the message is sent from the bot and the command matches', function() {
       let recorded_message = '';
@@ -42,7 +33,7 @@ describe('FeatureRequestPlugin', function() {
         content: '!feature-request',
         reply: () => {}
       };
-      assert(plugin.handle_message(message_fixture));
+      expect(plugin.handle_message(message_fixture)).toBeTruthy();
     });
     it('should not send a message if the message is sent from the bot', function() {
       let recorded_message = '';
@@ -56,7 +47,7 @@ describe('FeatureRequestPlugin', function() {
         }
       };
       plugin.handle_message(message_fixture);
-      assert(recorded_message == '');
+      expect(recorded_message).toEqual('');
     });
     it('should add a feature request', function() {
       let message_fixture = {
@@ -69,7 +60,7 @@ describe('FeatureRequestPlugin', function() {
       plugin.handle_message(message_fixture);
       let expected = ['this is my interesting request'];
       let actual = plugin.requests_for_user('notabot');
-      assert.deepEqual(actual, expected);
+      expect(actual).toEqual(expected);
     });
     it('should provide confirmation that a request has been added', function() {
       let recorded_message = '';
@@ -85,7 +76,7 @@ describe('FeatureRequestPlugin', function() {
       plugin.handle_message(message_fixture);
       let expected = 'Added the following to your feature requests:\n' +
                      'this is my interesting request';
-      assert(recorded_message === expected);
+      expect(recorded_message).toEqual(expected);
     });
     it('should list feature requests if a user has feature requests', function() {
       let recorded_message = '';
@@ -110,7 +101,7 @@ describe('FeatureRequestPlugin', function() {
                      'this is an interesting request\n' +
                      'this is another interesting request\n';
 
-      assert.equal(recorded_message, expected);
+      expect(recorded_message).toEqual(expected);
     });
     it('should print a help message for unhandled messages', function() {
       let recorded_message = '';
@@ -132,7 +123,7 @@ describe('FeatureRequestPlugin', function() {
             '!feature-request list\n' +
             'List the requests you have made\n';
 
-      assert.equal(recorded_message, expected);
+      expect(recorded_message).toEqual(expected);
     });
   });
 });

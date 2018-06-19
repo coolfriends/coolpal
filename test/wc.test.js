@@ -1,5 +1,5 @@
-const assert = require('assert');
-const WCPlugin = require('../src/plugins/wc/plugin.js');
+import assert from 'assert';
+import WCPlugin from '../lib/plugins/wc/plugin.js';
 
 describe('WCPlugin', function() {
   // TODO: Add test to make sure that axios logs when the url it was given

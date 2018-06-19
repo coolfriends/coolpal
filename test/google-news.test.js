@@ -1,9 +1,6 @@
-const assert = require('assert');
-const axios = require('axios');
+import GoogleNewsPlugin from '../lib/plugins/google-news/plugin.js';
 
-const GoogleNewsPlugin = require('../src/plugins/google-news/plugin.js');
-
-describe('GoogleNewsPlugin', function() {
+describe('GoogleNewsPlugin', () => {
   let pal = {
     prefix: '!',
     client: {
@@ -28,30 +25,23 @@ describe('GoogleNewsPlugin', function() {
     };
   };
 
-  describe('#constructor()', function() {
-    describe('supported_event_types', function() {
-      it('should only support the message event type', function() {
-        assert.deepEqual(plugin.supported_event_types, ['message']);
-      });
-    });
-  });
-  describe('#handle_message()', function() {
-    it('should return false if the first argument is not a match', function() {
+  describe('#handle_message()', () => {
+    it('should return false if the first argument is not a match', () => {
       let message_fixture = {
         content: '!not-google-news'
       };
-      assert(!plugin.handle_message(message_fixture));
+      expect(plugin.handle_message(message_fixture)).toBeFalsy();
     });
-    it('should return true if message is from the bot', function() {
+    it('should return true if message is from the bot', () => {
       let message_fixture = {
         content: '!news',
         author: {
           username: 'abot'
         }
       };
-      assert(plugin.handle_message(message_fixture));
+      expect(plugin.handle_message(message_fixture)).toBeTruthy();
     });
-    it('should not reply if message is from the bot', function() {
+    it('should not reply if message is from the bot', () => {
       let recorded_message = '';
       let message_fixture = {
         content: '!news',
@@ -63,9 +53,9 @@ describe('GoogleNewsPlugin', function() {
         }
       };
       plugin.handle_message(message_fixture);
-      assert.equal(recorded_message, '');
+      expect(recorded_message).toEqual('');
     });
-    it('should return true first arg is missing', function() {
+    it('should return true first arg is missing', () => {
       let message_fixture = {
         content: '!news',
         author: {
@@ -73,9 +63,9 @@ describe('GoogleNewsPlugin', function() {
         },
         reply: () => {}
       };
-      assert(plugin.handle_message(message_fixture));
+      expect(plugin.handle_message(message_fixture)).toBeTruthy();
     });
-    it('should send help message in reply if first arg is missing', function() {
+    it('should send help message in reply if first arg is missing', () => {
       let recorded_message = '';
       let message_fixture = {
         content: '!news',
@@ -92,9 +82,9 @@ describe('GoogleNewsPlugin', function() {
                      'Displays this message\n' +
                      '!news any topics\n' +
                      'Replies with a search result from Google\n';
-      assert.equal(recorded_message, expected);
+      expect(recorded_message).toEqual(expected);
     });
-    it('should send help message in reply if first arg is help', function() {
+    it('should send help message in reply if first arg is help', () => {
       let recorded_message = '';
       let message_fixture = {
         content: '!news help',
@@ -111,9 +101,9 @@ describe('GoogleNewsPlugin', function() {
                       'Displays this message\n' +
                       '!news any topics\n' +
                       'Replies with a search result from Google\n';
-      assert.equal(recorded_message, expected);
+      expect(recorded_message).toEqual(expected);
     });
-    it('should reply with search results if message is good', function() {
+    it('should reply with search results if message is good', () => {
       let google_news_mock = {
         search: () => {
           return new Promise((resolve, reject) => {
@@ -150,10 +140,10 @@ describe('GoogleNewsPlugin', function() {
 
       // wait 1 seconds to make sure the message gets recorded
       setTimeout(() => {
-        assert.equal(recorded_message, expected);
+        expect(recorded_message).toEqual(expected);
       }, 1);
     });
-    it('should send failed to get message if query was bad', function() {
+    it('should send failed to get message if query was bad', () => {
       let google_news_mock = {
         search: () => {
           return new Promise((resolve, reject) => {
@@ -184,8 +174,8 @@ describe('GoogleNewsPlugin', function() {
       }, 1);
     });
   });
-  describe('#call_google_news_rss()', function() {
-    it('should return true if google news search fails', function() {
+  describe('#call_google_news_rss()', () => {
+    it('should return true if google news search fails', () => {
       let google_news_mock = {
         search: () => {
           return new Promise((resolve, reject) => {
