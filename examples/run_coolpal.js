@@ -1,5 +1,5 @@
-const fs = require('fs');
-const CoolPal = require('../src/coolpal.js');
+import fs from 'fs';
+import CoolPal from '../lib/index';
 
 fs.readFile('examples/plugin_configuration.json', (err, data) => {
   if (err) {

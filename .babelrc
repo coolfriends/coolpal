@@ -1,5 +1,7 @@
 {
+  "plugins": ["source-map-support", "transform-runtime"],
   "presets": [
-     ["env"]
+    ["env", { "node": "8.10" }],
+    "stage-3"
   ]
 }
