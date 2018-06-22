@@ -8,7 +8,7 @@
     "coverage": "jest --coverage",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
     "test": "jest",
-    "start": "node dist/bin.bundle.js",
+    "start": "npm run bundle; node dist/bin.bundle.js",
     "docs": "jsdoc -d ./docs lib/**/*.js README.md",
     "format": "prettier lib/**/**/**/*.js --write",
     "precommit": "pretty-quick --staged"
