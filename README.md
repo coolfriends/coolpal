@@ -53,6 +53,13 @@ Run bot as daemon with Forever from source directory
 forever start --minUptime 100000000 ./dist/bin.bundle.js
 ```
 
+To start the bot without putting a token in the configuration file, export the
+following environment variable:
+
+```bash
+export COOLPAL_DISCORD_TOKEN="your-token"
+```
+
 ### Build docker image and run coolpal in container
 
 Make sure you have docker installed: https://docs.docker.com/engine/installation/
