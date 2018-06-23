@@ -50,7 +50,7 @@ npm start
 Run bot as daemon with Forever from source directory
 
 ```bash
-forever start --minUptime 100000000 ./bin/prod_bundle.min.js
+forever start --minUptime 100000000 ./dist/bin.bundle.js
 ```
 
 ### Build docker image and run coolpal in container
