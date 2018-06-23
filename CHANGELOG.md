@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Created a color function in `lib/utils.js` that can make Discrod text appear
+- Update README to reflect new build process. The build artifacts are
+  `dist/bin.bundle.js` and `dist/lib.bundle.js`.
+- Created a color function in `lib/utils.js` that can make Discord text appear
   in a code block as green or yellow.
 - Added a CHANGELOG.md file
 
