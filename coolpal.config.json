@@ -1,0 +1,33 @@
+{
+  "token": "",
+  "plugins": [
+    {
+      "name": "helloworld",
+      "configuration": {}
+    },
+    {
+      "name": "spam",
+      "configuration": {}
+    },
+    {
+      "name": "weather",
+      "configuration": {}
+    },
+    {
+      "name": "coinbase",
+      "configuration": {}
+    },
+    {
+      "name": "help",
+      "configuration": {}
+    },
+    {
+      "name": "feature-request",
+      "configuration": {}
+    },
+    {
+      "name": "google-news",
+      "configuration": {}
+    }
+  ]
+}
