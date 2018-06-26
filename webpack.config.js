@@ -3,7 +3,7 @@ const nodeExternals = require("webpack-node-externals");
 module.exports = {
   entry: {
     lib: "./lib/index.js",
-    bin: "./examples/run_coolpal.js"
+    bin: "./bin/coolpal"
   },
   output: {
     path: __dirname + "/dist",
@@ -12,7 +12,7 @@ module.exports = {
   mode: "development",
   target: "node",
   // Generate sourcemaps for proper error messages
-  devtool: 'source-map',
+  devtool: "source-map",
   // Since 'aws-sdk' is not compatible with webpack,
   // we exclude all node dependencies
   externals: [nodeExternals()],

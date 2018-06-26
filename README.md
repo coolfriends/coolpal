@@ -33,6 +33,16 @@ cd coolpal
 npm install
 ```
 
+Link the local executable to your /usr/bin path
+
+```bash
+npm link
+```
+
+```bash
+coolpal --help
+```
+
 ### Run coolpal on local machine
 
 Run bundle steps
@@ -52,6 +62,13 @@ Run bot as daemon with Forever from source directory
 ```bash
 forever start --minUptime 100000000 ./dist/bin.bundle.js
 ```
+
+## Configuration
+
+When looking for a configuration file, the following are checked in order:
+
+1.  CLI argument
+2.  Default configuration file name
 
 To start the bot without putting a token in the configuration file, export the
 following environment variable:
@@ -82,28 +99,35 @@ Run container and enter shell
 docker run -it coolpal
 ```
 
-Create docs
-
-```bash
-npm run docs
-```
-
-Format code
-
-```bash
-npm run format
-```
-
 ## Run the tests
 
 Make sure to run `npm install` to get the mocha dev dependency.
 Then run the tests like so:
 
-```bash
+````bash
 npm test
+
+
+## Create docs
+
+```bash
+npm run docs
+````
+
+## Format code
+
+```bash
+npm run format
 ```
 
+```
 ## Pre-commit
 
 The `precommit` script in `package.json` runs on any add. This will enforce
 good style. Make sure to have the latest dev-deps installed with `npm install`
+```
+
+## Todo
+
+- Get webpack working with a shebang line in `bin/coolpal` so it can become a
+  linked executable with `npm link`
