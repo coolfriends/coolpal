@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Created a new cli using commander.js that lives in `lib/cli`
 - `npm start` will now fall back on the `COOLPAL_DISCORD_TOKEN` environment
   variable. This will occur if there is no token key in the configuration, or if
   the token key is empty.
@@ -18,6 +19,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+- Moved minimal command parsing logic to `bin/coolpal`
+- Update build process to use new target at `bin/coolpal`
+- Use new CLI code
 - Update README to reflect new build process. The build artifacts are
   `dist/bin.bundle.js` and `dist/lib.bundle.js`.
 

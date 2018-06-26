@@ -63,7 +63,6 @@ Run bot as daemon with Forever from source directory
 forever start --minUptime 100000000 ./dist/bin.bundle.js
 ```
 
-
 ## Configuration
 
 When looking for a configuration file, the following are checked in order:
@@ -71,14 +70,12 @@ When looking for a configuration file, the following are checked in order:
 1.  CLI argument
 2.  Default configuration file name
 
-
 To start the bot without putting a token in the configuration file, export the
 following environment variable:
 
 ```bash
 export COOLPAL_DISCORD_TOKEN="your-token"
 ```
-
 
 ### Build docker image and run coolpal in container
 
@@ -129,3 +126,8 @@ npm run format
 The `precommit` script in `package.json` runs on any add. This will enforce
 good style. Make sure to have the latest dev-deps installed with `npm install`
 ```
+
+## Todo
+
+- Get webpack working with a shebang line in `bin/coolpal` so it can become a
+  linked executable with `npm link`
