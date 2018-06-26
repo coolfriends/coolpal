@@ -9,13 +9,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Update README to reflect new build process. The build artifacts are
-  `dist/bin.bundle.js` and `dist/lib.bundle.js`.
+- `npm start` will now fall back on the `COOLPAL_DISCORD_TOKEN` environment
+  variable. This will occur if there is no token key in the configuration, or if
+  the token key is empty.
 - Created a color function in `lib/utils.js` that can make Discord text appear
   in a code block as green or yellow.
 - Added a CHANGELOG.md file
 
 ### Changed
+
+- Update README to reflect new build process. The build artifacts are
+  `dist/bin.bundle.js` and `dist/lib.bundle.js`.
 
 ### Removed
 
