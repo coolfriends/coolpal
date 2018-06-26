@@ -1,9 +1,6 @@
 # npm packages
 node_modules/
 
-# production files
-bin/
-
 # package-lock.json (full dependency tree, thousands of lines)
 package-lock.json
 
@@ -11,5 +8,3 @@ package-lock.json
 .coolpal.json
 
 coverage/
-
-dist/

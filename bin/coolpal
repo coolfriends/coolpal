@@ -1,0 +1,2 @@
+import cli from "../lib/cli";
+cli.parse(process.argv)
