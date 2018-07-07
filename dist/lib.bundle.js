@@ -832,7 +832,7 @@
                       if (i) throw u;
                     }
                   }
-                  return e.channel.send(r), !0;
+                  return e.channel.send(o.color(r, "green")), !0;
                 }
                 var c = !0,
                   f = !1,
@@ -846,7 +846,7 @@
                     var m = d.value;
                     if (m.command === t[1])
                       return void 0 != m.help
-                        ? (e.reply(m.help), !0)
+                        ? (e.channel.send(o.color(m.help, "green")), !0)
                         : (e.reply(
                             m.command + " does not have a help message.\n"
                           ),

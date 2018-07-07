@@ -2,8 +2,8 @@
   var t = {};
   function r(n) {
     if (t[n]) return t[n].exports;
-    var i = (t[n] = { i: n, l: !1, exports: {} });
-    return e[n].call(i.exports, i, i.exports, r), (i.l = !0), i.exports;
+    var s = (t[n] = { i: n, l: !1, exports: {} });
+    return e[n].call(s.exports, s, s.exports, r), (s.l = !0), s.exports;
   }
   (r.m = e),
     (r.c = t),
@@ -25,13 +25,13 @@
         Object.defineProperty(n, "default", { enumerable: !0, value: e }),
         2 & t && "string" != typeof e)
       )
-        for (var i in e)
+        for (var s in e)
           r.d(
             n,
-            i,
+            s,
             function(t) {
               return e[t];
-            }.bind(null, i)
+            }.bind(null, s)
           );
       return n;
     }),
@@ -90,13 +90,13 @@
       var n = a(
           r(/*! babel-runtime/regenerator */ "babel-runtime/regenerator")
         ),
-        i = a(
+        s = a(
           r(
             /*! babel-runtime/helpers/asyncToGenerator */ "babel-runtime/helpers/asyncToGenerator"
           )
         );
       r(/*! source-map-support/register */ "source-map-support/register");
-      var s,
+      var i,
         u = a(r(/*! commander */ "commander")),
         l = a(r(/*! ./startCommand */ "./lib/cli/startCommand.js"));
       function a(e) {
@@ -108,9 +108,9 @@
           .description("start coolpal")
           .option("-c", "--config", "configuration file name")
           .action(
-            ((s = (0, i.default)(
+            ((i = (0, s.default)(
               n.default.mark(function e(t) {
-                var r, i;
+                var r, s;
                 return n.default.wrap(
                   function(e) {
                     for (;;)
@@ -118,9 +118,9 @@
                         case 0:
                           return (
                             (r = t.config ? t.config : "coolpal.config.json"),
-                            (i = new l.default({ config_filename: r })),
+                            (s = new l.default({ config_filename: r })),
                             (e.next = 4),
-                            i.run()
+                            s.run()
                           );
                         case 4:
                         case "end":
@@ -133,7 +133,7 @@
               })
             )),
             function(e) {
-              return s.apply(this, arguments);
+              return i.apply(this, arguments);
             })
           ),
         (t.default = u.default);
@@ -148,12 +148,12 @@
       var n = o(
           r(/*! babel-runtime/regenerator */ "babel-runtime/regenerator")
         ),
-        i = o(
+        s = o(
           r(
             /*! babel-runtime/helpers/asyncToGenerator */ "babel-runtime/helpers/asyncToGenerator"
           )
         ),
-        s = o(
+        i = o(
           r(
             /*! babel-runtime/helpers/classCallCheck */ "babel-runtime/helpers/classCallCheck"
           )
@@ -171,7 +171,7 @@
       }
       var c = (function() {
         function e(t) {
-          (0, s.default)(this, e),
+          (0, i.default)(this, e),
             (this.config_filename = t.config_filename || "coolpal.config.json");
         }
         return (
@@ -179,7 +179,7 @@
             {
               key: "run",
               value: (function() {
-                var e = (0, i.default)(
+                var e = (0, s.default)(
                   n.default.mark(function e() {
                     var t, r;
                     return n.default.wrap(
@@ -227,12 +227,12 @@
             /*! babel-runtime/core-js/get-iterator */ "babel-runtime/core-js/get-iterator"
           )
         ),
-        i = a(
+        s = a(
           r(
             /*! babel-runtime/helpers/classCallCheck */ "babel-runtime/helpers/classCallCheck"
           )
         ),
-        s = a(
+        i = a(
           r(
             /*! babel-runtime/helpers/createClass */ "babel-runtime/helpers/createClass"
           )
@@ -245,7 +245,7 @@
       }
       var o = (function() {
         function e(t) {
-          (0, i.default)(this, e),
+          (0, s.default)(this, e),
             (this.client = new u.default.Client()),
             (this.discord_token = t.token || process.env.COOLPAL_DISCORD_TOKEN),
             (this.prefix = t.prefix || "!"),
@@ -255,7 +255,7 @@
             this._configure_plugins(t.plugins);
         }
         return (
-          (0, s.default)(e, [
+          (0, i.default)(e, [
             {
               key: "start",
               value: function() {
@@ -276,23 +276,23 @@
               value: function(e) {
                 var t = !0,
                   r = !1,
-                  i = void 0;
+                  s = void 0;
                 try {
                   for (
-                    var s, u = (0, n.default)(e);
-                    !(t = (s = u.next()).done);
+                    var i, u = (0, n.default)(e);
+                    !(t = (i = u.next()).done);
                     t = !0
                   ) {
-                    var l = s.value;
+                    var l = i.value;
                     this._register_plugin(this._configure_plugin(l));
                   }
                 } catch (e) {
-                  (r = !0), (i = e);
+                  (r = !0), (s = e);
                 } finally {
                   try {
                     !t && u.return && u.return();
                   } finally {
-                    if (r) throw i;
+                    if (r) throw s;
                   }
                 }
               }
@@ -303,23 +303,23 @@
                 this._plugins.push(e);
                 var t = !0,
                   r = !1,
-                  i = void 0;
+                  s = void 0;
                 try {
                   for (
-                    var s, u = (0, n.default)(e.supported_event_types);
-                    !(t = (s = u.next()).done);
+                    var i, u = (0, n.default)(e.supported_event_types);
+                    !(t = (i = u.next()).done);
                     t = !0
                   ) {
-                    var l = s.value;
+                    var l = i.value;
                     this._event_types.includes(l) || this._event_types.push(l);
                   }
                 } catch (e) {
-                  (r = !0), (i = e);
+                  (r = !0), (s = e);
                 } finally {
                   try {
                     !t && u.return && u.return();
                   } finally {
-                    if (r) throw i;
+                    if (r) throw s;
                   }
                 }
               }
@@ -343,24 +343,24 @@
               value: function(e) {
                 var t = this;
                 this.client.on(e, function(r) {
-                  var i = !0,
-                    s = !1,
+                  var s = !0,
+                    i = !1,
                     u = void 0;
                   try {
                     for (
                       var l, a = (0, n.default)(t._plugins);
-                      !(i = (l = a.next()).done);
-                      i = !0
+                      !(s = (l = a.next()).done);
+                      s = !0
                     ) {
                       l.value.handle_event(e, r);
                     }
                   } catch (e) {
-                    (s = !0), (u = e);
+                    (i = !0), (u = e);
                   } finally {
                     try {
-                      !i && a.return && a.return();
+                      !s && a.return && a.return();
                     } finally {
-                      if (s) throw u;
+                      if (i) throw u;
                     }
                   }
                 });
@@ -374,18 +374,18 @@
                   r = void 0;
                 try {
                   for (
-                    var i, s = (0, n.default)(this._event_types);
-                    !(e = (i = s.next()).done);
+                    var s, i = (0, n.default)(this._event_types);
+                    !(e = (s = i.next()).done);
                     e = !0
                   ) {
-                    var u = i.value;
+                    var u = s.value;
                     this._receive_event(u);
                   }
                 } catch (e) {
                   (t = !0), (r = e);
                 } finally {
                   try {
-                    !e && s.return && s.return();
+                    !e && i.return && i.return();
                   } finally {
                     if (t) throw r;
                   }
@@ -415,12 +415,12 @@
             /*! babel-runtime/core-js/object/get-prototype-of */ "babel-runtime/core-js/object/get-prototype-of"
           )
         ),
-        i = c(
+        s = c(
           r(
             /*! babel-runtime/helpers/classCallCheck */ "babel-runtime/helpers/classCallCheck"
           )
         ),
-        s = c(
+        i = c(
           r(
             /*! babel-runtime/helpers/createClass */ "babel-runtime/helpers/createClass"
           )
@@ -452,24 +452,24 @@
         function t(e) {
           var r =
             arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-          (0, i.default)(this, t);
-          var s = (0, u.default)(
+          (0, s.default)(this, t);
+          var i = (0, u.default)(
             this,
             (t.__proto__ || (0, n.default)(t)).call(this, e, r)
           );
           return (
-            (s.command = "coinbase"),
-            (s.supported_event_types = ["message"]),
-            (s.base_url =
+            (i.command = "coinbase"),
+            (i.supported_event_types = ["message"]),
+            (i.base_url =
               r.base_url || "https://api.coinbase.com/v2/prices/BTC-USD/buy"),
-            (s.axios = r.axios || a.default.create()),
-            (s.coin_command_to_url_string = { btc: "BTC-USD", eth: "ETH-USD" }),
-            s
+            (i.axios = r.axios || a.default.create()),
+            (i.coin_command_to_url_string = { btc: "BTC-USD", eth: "ETH-USD" }),
+            i
           );
         }
         return (
           (0, l.default)(t, e),
-          (0, s.default)(t, [
+          (0, i.default)(t, [
             {
               key: "coin_price_url",
               value: function(e) {
@@ -558,12 +558,12 @@
             /*! babel-runtime/core-js/get-iterator */ "babel-runtime/core-js/get-iterator"
           )
         ),
-        i = c(
+        s = c(
           r(
             /*! babel-runtime/core-js/object/get-prototype-of */ "babel-runtime/core-js/object/get-prototype-of"
           )
         ),
-        s = c(
+        i = c(
           r(
             /*! babel-runtime/helpers/classCallCheck */ "babel-runtime/helpers/classCallCheck"
           )
@@ -599,10 +599,10 @@
         function t(e) {
           var r =
             arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-          (0, s.default)(this, t);
+          (0, i.default)(this, t);
           var n = (0, l.default)(
             this,
-            (t.__proto__ || (0, i.default)(t)).call(this, e, r)
+            (t.__proto__ || (0, s.default)(t)).call(this, e, r)
           );
           return (
             (n.command = "feature-request"),
@@ -646,8 +646,8 @@
                       "Added the following to your feature requests:\n" + r
                     );
                 } else if ("list" === t[1]) {
-                  var i = "Here are your feature requests:\n",
-                    s = !0,
+                  var s = "Here are your feature requests:\n",
+                    i = !0,
                     u = !1,
                     l = void 0;
                   try {
@@ -656,21 +656,21 @@
                         c = (0, n.default)(
                           this.requests_for_user(e.author.username)
                         );
-                      !(s = (a = c.next()).done);
-                      s = !0
+                      !(i = (a = c.next()).done);
+                      i = !0
                     ) {
-                      i += a.value + "\n";
+                      s += a.value + "\n";
                     }
                   } catch (e) {
                     (u = !0), (l = e);
                   } finally {
                     try {
-                      !s && c.return && c.return();
+                      !i && c.return && c.return();
                     } finally {
                       if (u) throw l;
                     }
                   }
-                  e.reply(i);
+                  e.reply(s);
                 } else e.reply(this.help);
                 return !0;
               }
@@ -706,12 +706,12 @@
             /*! babel-runtime/core-js/object/get-prototype-of */ "babel-runtime/core-js/object/get-prototype-of"
           )
         ),
-        i = p(
+        s = p(
           r(
             /*! babel-runtime/helpers/classCallCheck */ "babel-runtime/helpers/classCallCheck"
           )
         ),
-        s = p(
+        i = p(
           r(
             /*! babel-runtime/helpers/createClass */ "babel-runtime/helpers/createClass"
           )
@@ -744,21 +744,21 @@
         function t(e) {
           var r =
             arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-          (0, i.default)(this, t);
-          var s = (0, u.default)(
+          (0, s.default)(this, t);
+          var i = (0, u.default)(
             this,
             (t.__proto__ || (0, n.default)(t)).call(this, e, r)
           );
           return (
-            (s.command = "news"),
-            (s.supported_event_types = ["message"]),
-            (s.google_news = r.google_news || new c.default()),
-            s
+            (i.command = "news"),
+            (i.supported_event_types = ["message"]),
+            (i.google_news = r.google_news || new c.default()),
+            i
           );
         }
         return (
           (0, l.default)(t, e),
-          (0, s.default)(t, [
+          (0, i.default)(t, [
             {
               key: "handle_message",
               value: function(e) {
@@ -827,12 +827,12 @@
             /*! babel-runtime/core-js/object/get-prototype-of */ "babel-runtime/core-js/object/get-prototype-of"
           )
         ),
-        i = a(
+        s = a(
           r(
             /*! babel-runtime/helpers/classCallCheck */ "babel-runtime/helpers/classCallCheck"
           )
         ),
-        s = a(
+        i = a(
           r(
             /*! babel-runtime/helpers/createClass */ "babel-runtime/helpers/createClass"
           )
@@ -855,20 +855,20 @@
         function t(e) {
           var r =
             arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-          (0, i.default)(this, t);
-          var s = (0, u.default)(
+          (0, s.default)(this, t);
+          var i = (0, u.default)(
             this,
             (t.__proto__ || (0, n.default)(t)).call(this, e, r)
           );
           return (
-            (s.command = "helloworld"),
-            (s.supported_event_types = ["message"]),
-            s
+            (i.command = "helloworld"),
+            (i.supported_event_types = ["message"]),
+            i
           );
         }
         return (
           (0, l.default)(t, e),
-          (0, s.default)(t, [
+          (0, i.default)(t, [
             {
               key: "handle_message",
               value: function(e, t) {
@@ -897,12 +897,12 @@
             /*! babel-runtime/core-js/get-iterator */ "babel-runtime/core-js/get-iterator"
           )
         ),
-        i = c(
+        s = c(
           r(
             /*! babel-runtime/core-js/object/get-prototype-of */ "babel-runtime/core-js/object/get-prototype-of"
           )
         ),
-        s = c(
+        i = c(
           r(
             /*! babel-runtime/helpers/classCallCheck */ "babel-runtime/helpers/classCallCheck"
           )
@@ -938,10 +938,10 @@
         function t(e) {
           var r =
             arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-          (0, s.default)(this, t);
+          (0, i.default)(this, t);
           var n = (0, l.default)(
             this,
-            (t.__proto__ || (0, i.default)(t)).call(this, e, r)
+            (t.__proto__ || (0, s.default)(t)).call(this, e, r)
           );
           return (
             (n.command = "help"), (n.supported_event_types = ["message"]), n
@@ -962,28 +962,28 @@
                 if ("list" === t[1]) {
                   var r =
                       "\nHere are commands with help available.\nCall one with !help <command>\n",
-                    i = !0,
-                    s = !1,
+                    s = !0,
+                    i = !1,
                     u = void 0;
                   try {
                     for (
                       var l, a = (0, n.default)(this.pal.plugins);
-                      !(i = (l = a.next()).done);
-                      i = !0
+                      !(s = (l = a.next()).done);
+                      s = !0
                     ) {
                       var c = l.value;
                       void 0 != c.help && (r += c.command + "\n");
                     }
                   } catch (e) {
-                    (s = !0), (u = e);
+                    (i = !0), (u = e);
                   } finally {
                     try {
-                      !i && a.return && a.return();
+                      !s && a.return && a.return();
                     } finally {
-                      if (s) throw u;
+                      if (i) throw u;
                     }
                   }
-                  return e.channel.send(r), !0;
+                  return e.channel.send(o.color(r, "green")), !0;
                 }
                 var p = !0,
                   f = !1,
@@ -997,7 +997,7 @@
                     var _ = d.value;
                     if (_.command === t[1])
                       return void 0 != _.help
-                        ? (e.reply(_.help), !0)
+                        ? (e.channel.send(o.color(_.help, "green")), !0)
                         : (e.reply(
                             _.command + " does not have a help message.\n"
                           ),
@@ -1037,10 +1037,10 @@
         (t.plugin_name_to_class = void 0),
         r(/*! source-map-support/register */ "source-map-support/register");
       var n = c(r(/*! ./spam/plugin */ "./lib/plugins/spam/plugin.js")),
-        i = c(
+        s = c(
           r(/*! ./hello_world/plugin */ "./lib/plugins/hello_world/plugin.js")
         ),
-        s = c(r(/*! ./weather/plugin */ "./lib/plugins/weather/plugin.js")),
+        i = c(r(/*! ./weather/plugin */ "./lib/plugins/weather/plugin.js")),
         u = c(r(/*! ./coinbase/plugin */ "./lib/plugins/coinbase/plugin.js")),
         l = c(
           r(
@@ -1058,8 +1058,8 @@
       }
       var p = {
         spam: n.default,
-        helloworld: i.default,
-        weather: s.default,
+        helloworld: s.default,
+        weather: i.default,
         coinbase: u.default,
         "feature-request": l.default,
         help: a.default,
@@ -1073,17 +1073,17 @@
   \*******************************/
     /*! no static exports found */ function(e, t, r) {
       "use strict";
-      var n = s(
+      var n = i(
           r(
             /*! babel-runtime/helpers/classCallCheck */ "babel-runtime/helpers/classCallCheck"
           )
         ),
-        i = s(
+        s = i(
           r(
             /*! babel-runtime/helpers/createClass */ "babel-runtime/helpers/createClass"
           )
         );
-      function s(e) {
+      function i(e) {
         return e && e.__esModule ? e : { default: e };
       }
       r(/*! source-map-support/register */ "source-map-support/register");
@@ -1097,7 +1097,7 @@
             (this.prefix = "!");
         }
         return (
-          (0, i.default)(e, [
+          (0, s.default)(e, [
             {
               key: "handle_event",
               value: function(e, t) {
@@ -1133,12 +1133,12 @@
             /*! babel-runtime/core-js/object/get-prototype-of */ "babel-runtime/core-js/object/get-prototype-of"
           )
         ),
-        i = o(
+        s = o(
           r(
             /*! babel-runtime/helpers/classCallCheck */ "babel-runtime/helpers/classCallCheck"
           )
         ),
-        s = o(
+        i = o(
           r(
             /*! babel-runtime/helpers/createClass */ "babel-runtime/helpers/createClass"
           )
@@ -1167,7 +1167,7 @@
       }
       var c = (function(e) {
         function t() {
-          (0, i.default)(this, t);
+          (0, s.default)(this, t);
           var e = (0, u.default)(
             this,
             (t.__proto__ || (0, n.default)(t)).call(this)
@@ -1178,7 +1178,7 @@
         }
         return (
           (0, l.default)(t, e),
-          (0, s.default)(t, [
+          (0, i.default)(t, [
             {
               key: "handle_message",
               value: function(e, t) {
@@ -1189,10 +1189,10 @@
                   (n || NaN == n || e.reply("Usage: /spam [number of times]"),
                   e.author.username != t.client.user.username)
                 ) {
-                  for (var i = "", s = 0; s < n; ++s)
-                    (i += "SPAM!!! ".repeat(10) + "SPAM!!!\n"),
-                      s % 22 == 0 && (e.reply(i), (i = ""));
-                  e.reply(i);
+                  for (var s = "", i = 0; i < n; ++i)
+                    (s += "SPAM!!! ".repeat(10) + "SPAM!!!\n"),
+                      i % 22 == 0 && (e.reply(s), (s = ""));
+                  e.reply(s);
                 }
                 return !0;
               }
@@ -1211,19 +1211,19 @@
       "use strict";
       Object.defineProperty(t, "__esModule", { value: !0 });
       var n,
-        i = r(
+        s = r(
           /*! babel-runtime/core-js/get-iterator */ "babel-runtime/core-js/get-iterator"
         ),
-        s = (n = i) && n.__esModule ? n : { default: n };
+        i = (n = s) && n.__esModule ? n : { default: n };
       (t.split_message = function(e) {
         var t = e.content.split(" "),
           r = [],
           n = !0,
-          i = !1,
+          s = !1,
           u = void 0;
         try {
           for (
-            var l, a = (0, s.default)(t);
+            var l, a = (0, i.default)(t);
             !(n = (l = a.next()).done);
             n = !0
           ) {
@@ -1231,12 +1231,12 @@
             r.push(o.toLowerCase());
           }
         } catch (e) {
-          (i = !0), (u = e);
+          (s = !0), (u = e);
         } finally {
           try {
             !n && a.return && a.return();
           } finally {
-            if (i) throw u;
+            if (s) throw u;
           }
         }
         return r;
@@ -1273,8 +1273,8 @@
             /*! babel-runtime/core-js/promise */ "babel-runtime/core-js/promise"
           )
         ),
-        i = h(r(/*! babel-runtime/regenerator */ "babel-runtime/regenerator")),
-        s = h(
+        s = h(r(/*! babel-runtime/regenerator */ "babel-runtime/regenerator")),
+        i = h(
           r(
             /*! babel-runtime/helpers/asyncToGenerator */ "babel-runtime/helpers/asyncToGenerator"
           )
@@ -1339,10 +1339,10 @@
             {
               key: "handle_message",
               value: (function() {
-                var e = (0, s.default)(
-                  i.default.mark(function e(t, r) {
-                    var n, s, u;
-                    return i.default.wrap(
+                var e = (0, i.default)(
+                  s.default.mark(function e(t, r) {
+                    var n, i, u;
+                    return s.default.wrap(
                       function(e) {
                         for (;;)
                           switch ((e.prev = e.next)) {
@@ -1366,10 +1366,10 @@
                               return e.abrupt("return", !0);
                             case 5:
                               return (
-                                (s = n[1]),
-                                n[2] && (s += n[2]),
+                                (i = n[1]),
+                                n[2] && (i += n[2]),
                                 (e.next = 9),
-                                this.call_weather_js(s)
+                                this.call_weather_js(i)
                               );
                             case 9:
                               return (
@@ -1460,17 +1460,17 @@
       "use strict";
       Object.defineProperty(t, "__esModule", { value: !0 }),
         (t.readFileAsync = void 0);
-      var n = s(
+      var n = i(
         r(/*! babel-runtime/core-js/promise */ "babel-runtime/core-js/promise")
       );
       r(/*! source-map-support/register */ "source-map-support/register");
-      var i = s(r(/*! fs */ "fs"));
-      function s(e) {
+      var s = i(r(/*! fs */ "fs"));
+      function i(e) {
         return e && e.__esModule ? e : { default: e };
       }
       t.readFileAsync = function(e) {
         return new n.default(function(t, r) {
-          i.default.readFile(e, function(e, n) {
+          s.default.readFile(e, function(e, n) {
             e && r(e), t(n);
           });
         });

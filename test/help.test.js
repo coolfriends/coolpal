@@ -135,13 +135,15 @@ describe("HelpPlugin", function() {
         author: {
           username: "notabot"
         },
-        reply: message => {
-          recorded_message = message;
+        channel: {
+          send: message => {
+            recorded_message = message;
+          }
         }
       };
       plugin.handle_message(message_fixture);
       let expected = "A help message\n";
-      expect(recorded_message).toEqual(expected);
+      expect(recorded_message).toContain(expected);
     });
     it("should list available help commands", function() {
       let recorded_message = "";
